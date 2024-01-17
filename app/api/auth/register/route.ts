@@ -1,7 +1,6 @@
-import { PrismaClient } from "@prisma/client";
 import { hash } from "bcrypt";
 import { z } from "zod";
-
+import { PrismaClient } from "@/prisma/generated/client";
 const prisma = new PrismaClient();
 
 import { NextResponse } from "next/server";
@@ -15,7 +14,7 @@ export async function POST(request: Request) {
     const parsedCredentials = z
       .object({ email: z.string().email(), hashedPassword: z.string().min(6) })
       .parse({ email, hashedPassword });
-    const existingUser = await prisma.member.findUnique({
+    const existingUser = await prisma.user.findUnique({
       where: {
         email: parsedCredentials.email,
       },
@@ -27,7 +26,7 @@ export async function POST(request: Request) {
         error: "USER_ALREADY_EXISTS",
       });
     } else {
-      const user = await prisma.member.create({
+      const user = await prisma.user.create({
         data: {
           email: parsedCredentials.email,
           password: parsedCredentials.hashedPassword,

@@ -6,7 +6,7 @@ import { signIn } from "@/auth";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { AuthError } from "next-auth";
 export const login = async (values: z.infer<typeof LoginSchema>) => {
-  // console.log(values);
+  console.log(values);
   const validatedFields = LoginSchema.safeParse(values);
 
   if (validatedFields.success !== true || !validatedFields.data) {
@@ -21,6 +21,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
       password,
       redirectTo: DEFAULT_LOGIN_REDIRECT,
     });
+    return { success: "Login successful!" };
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
@@ -30,7 +31,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
           return { error: "Something went wrong" };
       }
     }
-    //We should inlcude this error, otherwise it not redirect us to Default login
+    // Include this error, otherwise, it may not redirect correctly
     throw error;
   }
 };

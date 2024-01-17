@@ -23,15 +23,29 @@ model User {
   imageLink String?
 }
 model Post {
-  id            String    @id @default(cuid())
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
-  title      String?
-  content    String?
-  author     User?       @relation(fields: [authorId], references: [id])
-  authorId   String?
+  id          String      @id @default(cuid())
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  title       String   
+  description String     
+  image       String     
+  tags        Tag[] 
+  
+  category    String?     
+  location    String?     
+  price       Float?      
+  author      User?       @relation(fields: [authorId], references: [id])
+  authorId    String?
   @@index([authorId], name: "idx_authorId")
+}
 
+model Tag {
+    id          String      @id @default(cuid())
+    name String?
+    postId   String?
+    author     Post?       @relation(fields: [postId], references: [id])
+    @@index([postId], name: "idx_postId")
+ 
 }
 model Product {
   id            String    @id @default(cuid())
