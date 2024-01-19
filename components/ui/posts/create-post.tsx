@@ -57,7 +57,7 @@ export const CreateForm = () => {
   const onSubmit = (values: z.infer<typeof PostSchema2>) => {
     setError("");
     setSuccess("");
-    console.log("Check if this function invokes or not.");
+    // console.log("Check if this function invokes or not.");
     // post(values);
     console.log("Form values:", values);
     startTransition(() => {
