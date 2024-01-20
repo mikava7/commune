@@ -14,6 +14,17 @@ export const {
     signIn: "/auth/login",
     error: "/auth/error",
   },
+  callbacks: {
+    async session({ token, session }) {
+      if (token.sub && session.user) {
+        session.user.id = token.sub;
+      }
+    },
+    async jwt({ token }) {
+      console.log({ token });
+      return token;
+    },
+  },
   adapter: PrismaAdapter(db),
   session: { strategy: "jwt" },
   ...authConfig,

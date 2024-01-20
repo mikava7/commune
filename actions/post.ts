@@ -1,7 +1,7 @@
 "use server";
 
 import * as z from "zod";
-import { PostSchema } from "@/schemas";
+import { PostSchema, PostSchema2 } from "@/schemas";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -12,39 +12,39 @@ import { auth } from "@/auth";
 type PostCreateInput = {
   title: string;
   description: string;
-  category?: string | null;
-  location?: string | null;
-  price?: number | null;
-  image?: string; // Add the missing 'image' property
+  image: string;
+  user: {
+    id: string | undefined;
+  };
 };
 
-export const post = async (values: z.infer<typeof PostSchema>) => {
+export const post = async (values: z.infer<typeof PostSchema2>) => {
   const session = await auth();
+  const userId: string | undefined = session?.user?.id;
   console.log("session", session);
 
   console.log(values);
-  const validatedFields = PostSchema.safeParse(values);
+  const validatedFields = PostSchema2.safeParse(values);
   console.log("validatedFields", validatedFields);
 
   if (validatedFields.success !== true || !validatedFields.data) {
     return { error: "Invalid fields!" };
   }
 
-  const { title, description, category, location, price, ...tags } =
-    validatedFields.data;
-
-  const createInput: PostCreateInput = {
-    title,
-    description,
-    category,
-    location,
-    price,
-    image,
-  };
-
+  const { title, description } = validatedFields.data;
+  const image = "/test";
   try {
     await db.post.create({
-      data: createInput,
+      data: {
+        title,
+        description,
+        image,
+        author: {
+          connect: {
+            id: userId,
+          },
+        },
+      },
     });
     console.log("Post created successfully");
     return { success: "Post created successfully" };
@@ -54,7 +54,7 @@ export const post = async (values: z.infer<typeof PostSchema>) => {
   } finally {
     await db.$disconnect();
     // Commenting out revalidatePath and redirect for now
-    // revalidatePath("/");
-    // redirect("/");
+    revalidatePath("/");
+    redirect("/");
   }
 };

@@ -1234,40 +1234,6 @@ export namespace Prisma {
 
 
   /**
-   * Count Type PostCountOutputType
-   */
-
-  export type PostCountOutputType = {
-    tags: number
-  }
-
-  export type PostCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tags?: boolean | PostCountOutputTypeCountTagsArgs
-  }
-
-  // Custom InputTypes
-
-  /**
-   * PostCountOutputType without action
-   */
-  export type PostCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PostCountOutputType
-     */
-    select?: PostCountOutputTypeSelect<ExtArgs> | null
-  }
-
-
-  /**
-   * PostCountOutputType without action
-   */
-  export type PostCountOutputTypeCountTagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TagWhereInput
-  }
-
-
-
-  /**
    * Models
    */
 
@@ -2281,18 +2247,8 @@ export namespace Prisma {
 
   export type AggregatePost = {
     _count: PostCountAggregateOutputType | null
-    _avg: PostAvgAggregateOutputType | null
-    _sum: PostSumAggregateOutputType | null
     _min: PostMinAggregateOutputType | null
     _max: PostMaxAggregateOutputType | null
-  }
-
-  export type PostAvgAggregateOutputType = {
-    price: number | null
-  }
-
-  export type PostSumAggregateOutputType = {
-    price: number | null
   }
 
   export type PostMinAggregateOutputType = {
@@ -2302,9 +2258,6 @@ export namespace Prisma {
     title: string | null
     description: string | null
     image: string | null
-    category: string | null
-    location: string | null
-    price: number | null
     authorId: string | null
   }
 
@@ -2315,9 +2268,6 @@ export namespace Prisma {
     title: string | null
     description: string | null
     image: string | null
-    category: string | null
-    location: string | null
-    price: number | null
     authorId: string | null
   }
 
@@ -2328,21 +2278,10 @@ export namespace Prisma {
     title: number
     description: number
     image: number
-    category: number
-    location: number
-    price: number
     authorId: number
     _all: number
   }
 
-
-  export type PostAvgAggregateInputType = {
-    price?: true
-  }
-
-  export type PostSumAggregateInputType = {
-    price?: true
-  }
 
   export type PostMinAggregateInputType = {
     id?: true
@@ -2351,9 +2290,6 @@ export namespace Prisma {
     title?: true
     description?: true
     image?: true
-    category?: true
-    location?: true
-    price?: true
     authorId?: true
   }
 
@@ -2364,9 +2300,6 @@ export namespace Prisma {
     title?: true
     description?: true
     image?: true
-    category?: true
-    location?: true
-    price?: true
     authorId?: true
   }
 
@@ -2377,9 +2310,6 @@ export namespace Prisma {
     title?: true
     description?: true
     image?: true
-    category?: true
-    location?: true
-    price?: true
     authorId?: true
     _all?: true
   }
@@ -2422,18 +2352,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: PostAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: PostSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: PostMinAggregateInputType
@@ -2464,8 +2382,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: PostCountAggregateInputType | true
-    _avg?: PostAvgAggregateInputType
-    _sum?: PostSumAggregateInputType
     _min?: PostMinAggregateInputType
     _max?: PostMaxAggregateInputType
   }
@@ -2477,13 +2393,8 @@ export namespace Prisma {
     title: string
     description: string
     image: string
-    category: string | null
-    location: string | null
-    price: number | null
     authorId: string | null
     _count: PostCountAggregateOutputType | null
-    _avg: PostAvgAggregateOutputType | null
-    _sum: PostSumAggregateOutputType | null
     _min: PostMinAggregateOutputType | null
     _max: PostMaxAggregateOutputType | null
   }
@@ -2509,13 +2420,8 @@ export namespace Prisma {
     title?: boolean
     description?: boolean
     image?: boolean
-    category?: boolean
-    location?: boolean
-    price?: boolean
     authorId?: boolean
-    tags?: boolean | Post$tagsArgs<ExtArgs>
     author?: boolean | Post$authorArgs<ExtArgs>
-    _count?: boolean | PostCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["post"]>
 
   export type PostSelectScalar = {
@@ -2525,23 +2431,17 @@ export namespace Prisma {
     title?: boolean
     description?: boolean
     image?: boolean
-    category?: boolean
-    location?: boolean
-    price?: boolean
     authorId?: boolean
   }
 
   export type PostInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tags?: boolean | Post$tagsArgs<ExtArgs>
     author?: boolean | Post$authorArgs<ExtArgs>
-    _count?: boolean | PostCountOutputTypeDefaultArgs<ExtArgs>
   }
 
 
   export type $PostPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Post"
     objects: {
-      tags: Prisma.$TagPayload<ExtArgs>[]
       author: Prisma.$UserPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -2551,9 +2451,6 @@ export namespace Prisma {
       title: string
       description: string
       image: string
-      category: string | null
-      location: string | null
-      price: number | null
       authorId: string | null
     }, ExtArgs["result"]["post"]>
     composites: {}
@@ -2920,8 +2817,6 @@ export namespace Prisma {
   export interface Prisma__PostClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    tags<T extends Post$tagsArgs<ExtArgs> = {}>(args?: Subset<T, Post$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, 'findMany'> | Null>;
-
     author<T extends Post$authorArgs<ExtArgs> = {}>(args?: Subset<T, Post$authorArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
     /**
@@ -2958,9 +2853,6 @@ export namespace Prisma {
     readonly title: FieldRef<"Post", 'String'>
     readonly description: FieldRef<"Post", 'String'>
     readonly image: FieldRef<"Post", 'String'>
-    readonly category: FieldRef<"Post", 'String'>
-    readonly location: FieldRef<"Post", 'String'>
-    readonly price: FieldRef<"Post", 'Float'>
     readonly authorId: FieldRef<"Post", 'String'>
   }
     
@@ -3274,27 +3166,6 @@ export namespace Prisma {
 
 
   /**
-   * Post.tags
-   */
-  export type Post$tagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Tag
-     */
-    select?: TagSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: TagInclude<ExtArgs> | null
-    where?: TagWhereInput
-    orderBy?: TagOrderByWithRelationInput | TagOrderByWithRelationInput[]
-    cursor?: TagWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: TagScalarFieldEnum | TagScalarFieldEnum[]
-  }
-
-
-  /**
    * Post.author
    */
   export type Post$authorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3474,7 +3345,6 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     postId?: boolean
-    author?: boolean | Tag$authorArgs<ExtArgs>
   }, ExtArgs["result"]["tag"]>
 
   export type TagSelectScalar = {
@@ -3483,16 +3353,10 @@ export namespace Prisma {
     postId?: boolean
   }
 
-  export type TagInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    author?: boolean | Tag$authorArgs<ExtArgs>
-  }
-
 
   export type $TagPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Tag"
-    objects: {
-      author: Prisma.$PostPayload<ExtArgs> | null
-    }
+    objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string | null
@@ -3862,7 +3726,6 @@ export namespace Prisma {
   export interface Prisma__TagClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    author<T extends Tag$authorArgs<ExtArgs> = {}>(args?: Subset<T, Tag$authorArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3909,10 +3772,6 @@ export namespace Prisma {
      */
     select?: TagSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: TagInclude<ExtArgs> | null
-    /**
      * Filter, which Tag to fetch.
      */
     where: TagWhereUniqueInput
@@ -3928,10 +3787,6 @@ export namespace Prisma {
      */
     select?: TagSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: TagInclude<ExtArgs> | null
-    /**
      * Filter, which Tag to fetch.
      */
     where: TagWhereUniqueInput
@@ -3946,10 +3801,6 @@ export namespace Prisma {
      * Select specific fields to fetch from the Tag
      */
     select?: TagSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: TagInclude<ExtArgs> | null
     /**
      * Filter, which Tag to fetch.
      */
@@ -3996,10 +3847,6 @@ export namespace Prisma {
      */
     select?: TagSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: TagInclude<ExtArgs> | null
-    /**
      * Filter, which Tag to fetch.
      */
     where?: TagWhereInput
@@ -4045,10 +3892,6 @@ export namespace Prisma {
      */
     select?: TagSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: TagInclude<ExtArgs> | null
-    /**
      * Filter, which Tags to fetch.
      */
     where?: TagWhereInput
@@ -4089,10 +3932,6 @@ export namespace Prisma {
      */
     select?: TagSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: TagInclude<ExtArgs> | null
-    /**
      * The data needed to create a Tag.
      */
     data?: XOR<TagCreateInput, TagUncheckedCreateInput>
@@ -4119,10 +3958,6 @@ export namespace Prisma {
      * Select specific fields to fetch from the Tag
      */
     select?: TagSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: TagInclude<ExtArgs> | null
     /**
      * The data needed to update a Tag.
      */
@@ -4158,10 +3993,6 @@ export namespace Prisma {
      */
     select?: TagSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: TagInclude<ExtArgs> | null
-    /**
      * The filter to search for the Tag to update in case it exists.
      */
     where: TagWhereUniqueInput
@@ -4185,10 +4016,6 @@ export namespace Prisma {
      */
     select?: TagSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: TagInclude<ExtArgs> | null
-    /**
      * Filter which Tag to delete.
      */
     where: TagWhereUniqueInput
@@ -4207,22 +4034,6 @@ export namespace Prisma {
 
 
   /**
-   * Tag.author
-   */
-  export type Tag$authorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: PostInclude<ExtArgs> | null
-    where?: PostWhereInput
-  }
-
-
-  /**
    * Tag without action
    */
   export type TagDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4230,10 +4041,6 @@ export namespace Prisma {
      * Select specific fields to fetch from the Tag
      */
     select?: TagSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: TagInclude<ExtArgs> | null
   }
 
 
@@ -6301,9 +6108,6 @@ export namespace Prisma {
     title: 'title',
     description: 'description',
     image: 'image',
-    category: 'category',
-    location: 'location',
-    price: 'price',
     authorId: 'authorId'
   };
 
@@ -6387,13 +6191,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Float'
-   */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
-
-  /**
    * Reference to a field of type 'Decimal'
    */
   export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
@@ -6404,6 +6201,13 @@ export namespace Prisma {
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
     
   /**
    * Deep Input Types
@@ -6486,11 +6290,7 @@ export namespace Prisma {
     title?: StringFilter<"Post"> | string
     description?: StringFilter<"Post"> | string
     image?: StringFilter<"Post"> | string
-    category?: StringNullableFilter<"Post"> | string | null
-    location?: StringNullableFilter<"Post"> | string | null
-    price?: FloatNullableFilter<"Post"> | number | null
     authorId?: StringNullableFilter<"Post"> | string | null
-    tags?: TagListRelationFilter
     author?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }
 
@@ -6501,11 +6301,7 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     image?: SortOrder
-    category?: SortOrderInput | SortOrder
-    location?: SortOrderInput | SortOrder
-    price?: SortOrderInput | SortOrder
     authorId?: SortOrderInput | SortOrder
-    tags?: TagOrderByRelationAggregateInput
     author?: UserOrderByWithRelationInput
   }
 
@@ -6519,11 +6315,7 @@ export namespace Prisma {
     title?: StringFilter<"Post"> | string
     description?: StringFilter<"Post"> | string
     image?: StringFilter<"Post"> | string
-    category?: StringNullableFilter<"Post"> | string | null
-    location?: StringNullableFilter<"Post"> | string | null
-    price?: FloatNullableFilter<"Post"> | number | null
     authorId?: StringNullableFilter<"Post"> | string | null
-    tags?: TagListRelationFilter
     author?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }, "id">
 
@@ -6534,15 +6326,10 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     image?: SortOrder
-    category?: SortOrderInput | SortOrder
-    location?: SortOrderInput | SortOrder
-    price?: SortOrderInput | SortOrder
     authorId?: SortOrderInput | SortOrder
     _count?: PostCountOrderByAggregateInput
-    _avg?: PostAvgOrderByAggregateInput
     _max?: PostMaxOrderByAggregateInput
     _min?: PostMinOrderByAggregateInput
-    _sum?: PostSumOrderByAggregateInput
   }
 
   export type PostScalarWhereWithAggregatesInput = {
@@ -6555,9 +6342,6 @@ export namespace Prisma {
     title?: StringWithAggregatesFilter<"Post"> | string
     description?: StringWithAggregatesFilter<"Post"> | string
     image?: StringWithAggregatesFilter<"Post"> | string
-    category?: StringNullableWithAggregatesFilter<"Post"> | string | null
-    location?: StringNullableWithAggregatesFilter<"Post"> | string | null
-    price?: FloatNullableWithAggregatesFilter<"Post"> | number | null
     authorId?: StringNullableWithAggregatesFilter<"Post"> | string | null
   }
 
@@ -6568,14 +6352,12 @@ export namespace Prisma {
     id?: StringFilter<"Tag"> | string
     name?: StringNullableFilter<"Tag"> | string | null
     postId?: StringNullableFilter<"Tag"> | string | null
-    author?: XOR<PostNullableRelationFilter, PostWhereInput> | null
   }
 
   export type TagOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrderInput | SortOrder
     postId?: SortOrderInput | SortOrder
-    author?: PostOrderByWithRelationInput
   }
 
   export type TagWhereUniqueInput = Prisma.AtLeast<{
@@ -6585,7 +6367,6 @@ export namespace Prisma {
     NOT?: TagWhereInput | TagWhereInput[]
     name?: StringNullableFilter<"Tag"> | string | null
     postId?: StringNullableFilter<"Tag"> | string | null
-    author?: XOR<PostNullableRelationFilter, PostWhereInput> | null
   }, "id">
 
   export type TagOrderByWithAggregationInput = {
@@ -6853,10 +6634,6 @@ export namespace Prisma {
     title: string
     description: string
     image: string
-    category?: string | null
-    location?: string | null
-    price?: number | null
-    tags?: TagCreateNestedManyWithoutAuthorInput
     author?: UserCreateNestedOneWithoutPostsInput
   }
 
@@ -6867,11 +6644,7 @@ export namespace Prisma {
     title: string
     description: string
     image: string
-    category?: string | null
-    location?: string | null
-    price?: number | null
     authorId?: string | null
-    tags?: TagUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type PostUpdateInput = {
@@ -6881,10 +6654,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    category?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
-    tags?: TagUpdateManyWithoutAuthorNestedInput
     author?: UserUpdateOneWithoutPostsNestedInput
   }
 
@@ -6895,11 +6664,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    category?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
     authorId?: NullableStringFieldUpdateOperationsInput | string | null
-    tags?: TagUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type PostCreateManyInput = {
@@ -6909,9 +6674,6 @@ export namespace Prisma {
     title: string
     description: string
     image: string
-    category?: string | null
-    location?: string | null
-    price?: number | null
     authorId?: string | null
   }
 
@@ -6922,9 +6684,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    category?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
   export type PostUncheckedUpdateManyInput = {
@@ -6934,16 +6693,13 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    category?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
     authorId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TagCreateInput = {
     id?: string
     name?: string | null
-    author?: PostCreateNestedOneWithoutTagsInput
+    postId?: string | null
   }
 
   export type TagUncheckedCreateInput = {
@@ -6955,7 +6711,7 @@ export namespace Prisma {
   export type TagUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    author?: PostUpdateOneWithoutTagsNestedInput
+    postId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TagUncheckedUpdateInput = {
@@ -6973,6 +6729,7 @@ export namespace Prisma {
   export type TagUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    postId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TagUncheckedUpdateManyInput = {
@@ -7296,30 +7053,9 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type FloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type TagListRelationFilter = {
-    every?: TagWhereInput
-    some?: TagWhereInput
-    none?: TagWhereInput
-  }
-
   export type UserNullableRelationFilter = {
     is?: UserWhereInput | null
     isNot?: UserWhereInput | null
-  }
-
-  export type TagOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type PostCountOrderByAggregateInput = {
@@ -7329,14 +7065,7 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     image?: SortOrder
-    category?: SortOrder
-    location?: SortOrder
-    price?: SortOrder
     authorId?: SortOrder
-  }
-
-  export type PostAvgOrderByAggregateInput = {
-    price?: SortOrder
   }
 
   export type PostMaxOrderByAggregateInput = {
@@ -7346,9 +7075,6 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     image?: SortOrder
-    category?: SortOrder
-    location?: SortOrder
-    price?: SortOrder
     authorId?: SortOrder
   }
 
@@ -7359,14 +7085,7 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     image?: SortOrder
-    category?: SortOrder
-    location?: SortOrder
-    price?: SortOrder
     authorId?: SortOrder
-  }
-
-  export type PostSumOrderByAggregateInput = {
-    price?: SortOrder
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -7381,27 +7100,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedFloatNullableFilter<$PrismaModel>
-    _min?: NestedFloatNullableFilter<$PrismaModel>
-    _max?: NestedFloatNullableFilter<$PrismaModel>
-  }
-
-  export type PostNullableRelationFilter = {
-    is?: PostWhereInput | null
-    isNot?: PostWhereInput | null
   }
 
   export type TagCountOrderByAggregateInput = {
@@ -7714,50 +7412,14 @@ export namespace Prisma {
     deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
   }
 
-  export type TagCreateNestedManyWithoutAuthorInput = {
-    create?: XOR<TagCreateWithoutAuthorInput, TagUncheckedCreateWithoutAuthorInput> | TagCreateWithoutAuthorInput[] | TagUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: TagCreateOrConnectWithoutAuthorInput | TagCreateOrConnectWithoutAuthorInput[]
-    createMany?: TagCreateManyAuthorInputEnvelope
-    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
-  }
-
   export type UserCreateNestedOneWithoutPostsInput = {
     create?: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
     connectOrCreate?: UserCreateOrConnectWithoutPostsInput
     connect?: UserWhereUniqueInput
   }
 
-  export type TagUncheckedCreateNestedManyWithoutAuthorInput = {
-    create?: XOR<TagCreateWithoutAuthorInput, TagUncheckedCreateWithoutAuthorInput> | TagCreateWithoutAuthorInput[] | TagUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: TagCreateOrConnectWithoutAuthorInput | TagCreateOrConnectWithoutAuthorInput[]
-    createMany?: TagCreateManyAuthorInputEnvelope
-    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
-  }
-
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
-  }
-
-  export type NullableFloatFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type TagUpdateManyWithoutAuthorNestedInput = {
-    create?: XOR<TagCreateWithoutAuthorInput, TagUncheckedCreateWithoutAuthorInput> | TagCreateWithoutAuthorInput[] | TagUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: TagCreateOrConnectWithoutAuthorInput | TagCreateOrConnectWithoutAuthorInput[]
-    upsert?: TagUpsertWithWhereUniqueWithoutAuthorInput | TagUpsertWithWhereUniqueWithoutAuthorInput[]
-    createMany?: TagCreateManyAuthorInputEnvelope
-    set?: TagWhereUniqueInput | TagWhereUniqueInput[]
-    disconnect?: TagWhereUniqueInput | TagWhereUniqueInput[]
-    delete?: TagWhereUniqueInput | TagWhereUniqueInput[]
-    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
-    update?: TagUpdateWithWhereUniqueWithoutAuthorInput | TagUpdateWithWhereUniqueWithoutAuthorInput[]
-    updateMany?: TagUpdateManyWithWhereWithoutAuthorInput | TagUpdateManyWithWhereWithoutAuthorInput[]
-    deleteMany?: TagScalarWhereInput | TagScalarWhereInput[]
   }
 
   export type UserUpdateOneWithoutPostsNestedInput = {
@@ -7768,36 +7430,6 @@ export namespace Prisma {
     delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPostsInput, UserUpdateWithoutPostsInput>, UserUncheckedUpdateWithoutPostsInput>
-  }
-
-  export type TagUncheckedUpdateManyWithoutAuthorNestedInput = {
-    create?: XOR<TagCreateWithoutAuthorInput, TagUncheckedCreateWithoutAuthorInput> | TagCreateWithoutAuthorInput[] | TagUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: TagCreateOrConnectWithoutAuthorInput | TagCreateOrConnectWithoutAuthorInput[]
-    upsert?: TagUpsertWithWhereUniqueWithoutAuthorInput | TagUpsertWithWhereUniqueWithoutAuthorInput[]
-    createMany?: TagCreateManyAuthorInputEnvelope
-    set?: TagWhereUniqueInput | TagWhereUniqueInput[]
-    disconnect?: TagWhereUniqueInput | TagWhereUniqueInput[]
-    delete?: TagWhereUniqueInput | TagWhereUniqueInput[]
-    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
-    update?: TagUpdateWithWhereUniqueWithoutAuthorInput | TagUpdateWithWhereUniqueWithoutAuthorInput[]
-    updateMany?: TagUpdateManyWithWhereWithoutAuthorInput | TagUpdateManyWithWhereWithoutAuthorInput[]
-    deleteMany?: TagScalarWhereInput | TagScalarWhereInput[]
-  }
-
-  export type PostCreateNestedOneWithoutTagsInput = {
-    create?: XOR<PostCreateWithoutTagsInput, PostUncheckedCreateWithoutTagsInput>
-    connectOrCreate?: PostCreateOrConnectWithoutTagsInput
-    connect?: PostWhereUniqueInput
-  }
-
-  export type PostUpdateOneWithoutTagsNestedInput = {
-    create?: XOR<PostCreateWithoutTagsInput, PostUncheckedCreateWithoutTagsInput>
-    connectOrCreate?: PostCreateOrConnectWithoutTagsInput
-    upsert?: PostUpsertWithoutTagsInput
-    disconnect?: PostWhereInput | boolean
-    delete?: PostWhereInput | boolean
-    connect?: PostWhereUniqueInput
-    update?: XOR<XOR<PostUpdateToOneWithWhereWithoutTagsInput, PostUpdateWithoutTagsInput>, PostUncheckedUpdateWithoutTagsInput>
   }
 
   export type UserCreateNestedOneWithoutProductInput = {
@@ -7941,17 +7573,6 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[]
@@ -7964,22 +7585,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedFloatNullableFilter<$PrismaModel>
-    _min?: NestedFloatNullableFilter<$PrismaModel>
-    _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
   export type NestedDecimalNullableFilter<$PrismaModel = never> = {
@@ -8025,6 +7630,17 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
   export type PostCreateWithoutAuthorInput = {
     id?: string
     createdAt?: Date | string
@@ -8032,10 +7648,6 @@ export namespace Prisma {
     title: string
     description: string
     image: string
-    category?: string | null
-    location?: string | null
-    price?: number | null
-    tags?: TagCreateNestedManyWithoutAuthorInput
   }
 
   export type PostUncheckedCreateWithoutAuthorInput = {
@@ -8045,10 +7657,6 @@ export namespace Prisma {
     title: string
     description: string
     image: string
-    category?: string | null
-    location?: string | null
-    price?: number | null
-    tags?: TagUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type PostCreateOrConnectWithoutAuthorInput = {
@@ -8155,9 +7763,6 @@ export namespace Prisma {
     title?: StringFilter<"Post"> | string
     description?: StringFilter<"Post"> | string
     image?: StringFilter<"Post"> | string
-    category?: StringNullableFilter<"Post"> | string | null
-    location?: StringNullableFilter<"Post"> | string | null
-    price?: FloatNullableFilter<"Post"> | number | null
     authorId?: StringNullableFilter<"Post"> | string | null
   }
 
@@ -8225,26 +7830,6 @@ export namespace Prisma {
     session_state?: StringNullableFilter<"Account"> | string | null
   }
 
-  export type TagCreateWithoutAuthorInput = {
-    id?: string
-    name?: string | null
-  }
-
-  export type TagUncheckedCreateWithoutAuthorInput = {
-    id?: string
-    name?: string | null
-  }
-
-  export type TagCreateOrConnectWithoutAuthorInput = {
-    where: TagWhereUniqueInput
-    create: XOR<TagCreateWithoutAuthorInput, TagUncheckedCreateWithoutAuthorInput>
-  }
-
-  export type TagCreateManyAuthorInputEnvelope = {
-    data: TagCreateManyAuthorInput | TagCreateManyAuthorInput[]
-    skipDuplicates?: boolean
-  }
-
   export type UserCreateWithoutPostsInput = {
     id?: string
     email?: string | null
@@ -8270,31 +7855,6 @@ export namespace Prisma {
   export type UserCreateOrConnectWithoutPostsInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
-  }
-
-  export type TagUpsertWithWhereUniqueWithoutAuthorInput = {
-    where: TagWhereUniqueInput
-    update: XOR<TagUpdateWithoutAuthorInput, TagUncheckedUpdateWithoutAuthorInput>
-    create: XOR<TagCreateWithoutAuthorInput, TagUncheckedCreateWithoutAuthorInput>
-  }
-
-  export type TagUpdateWithWhereUniqueWithoutAuthorInput = {
-    where: TagWhereUniqueInput
-    data: XOR<TagUpdateWithoutAuthorInput, TagUncheckedUpdateWithoutAuthorInput>
-  }
-
-  export type TagUpdateManyWithWhereWithoutAuthorInput = {
-    where: TagScalarWhereInput
-    data: XOR<TagUpdateManyMutationInput, TagUncheckedUpdateManyWithoutAuthorInput>
-  }
-
-  export type TagScalarWhereInput = {
-    AND?: TagScalarWhereInput | TagScalarWhereInput[]
-    OR?: TagScalarWhereInput[]
-    NOT?: TagScalarWhereInput | TagScalarWhereInput[]
-    id?: StringFilter<"Tag"> | string
-    name?: StringNullableFilter<"Tag"> | string | null
-    postId?: StringNullableFilter<"Tag"> | string | null
   }
 
   export type UserUpsertWithoutPostsInput = {
@@ -8328,74 +7888,6 @@ export namespace Prisma {
     imageLink?: NullableStringFieldUpdateOperationsInput | string | null
     product?: ProductUncheckedUpdateManyWithoutAuthorNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type PostCreateWithoutTagsInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    title: string
-    description: string
-    image: string
-    category?: string | null
-    location?: string | null
-    price?: number | null
-    author?: UserCreateNestedOneWithoutPostsInput
-  }
-
-  export type PostUncheckedCreateWithoutTagsInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    title: string
-    description: string
-    image: string
-    category?: string | null
-    location?: string | null
-    price?: number | null
-    authorId?: string | null
-  }
-
-  export type PostCreateOrConnectWithoutTagsInput = {
-    where: PostWhereUniqueInput
-    create: XOR<PostCreateWithoutTagsInput, PostUncheckedCreateWithoutTagsInput>
-  }
-
-  export type PostUpsertWithoutTagsInput = {
-    update: XOR<PostUpdateWithoutTagsInput, PostUncheckedUpdateWithoutTagsInput>
-    create: XOR<PostCreateWithoutTagsInput, PostUncheckedCreateWithoutTagsInput>
-    where?: PostWhereInput
-  }
-
-  export type PostUpdateToOneWithWhereWithoutTagsInput = {
-    where?: PostWhereInput
-    data: XOR<PostUpdateWithoutTagsInput, PostUncheckedUpdateWithoutTagsInput>
-  }
-
-  export type PostUpdateWithoutTagsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    image?: StringFieldUpdateOperationsInput | string
-    category?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
-    author?: UserUpdateOneWithoutPostsNestedInput
-  }
-
-  export type PostUncheckedUpdateWithoutTagsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    image?: StringFieldUpdateOperationsInput | string
-    category?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
-    authorId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserCreateWithoutProductInput = {
@@ -8525,9 +8017,6 @@ export namespace Prisma {
     title: string
     description: string
     image: string
-    category?: string | null
-    location?: string | null
-    price?: number | null
   }
 
   export type ProductCreateManyAuthorInput = {
@@ -8561,10 +8050,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    category?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
-    tags?: TagUpdateManyWithoutAuthorNestedInput
   }
 
   export type PostUncheckedUpdateWithoutAuthorInput = {
@@ -8574,10 +8059,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    category?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
-    tags?: TagUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type PostUncheckedUpdateManyWithoutAuthorInput = {
@@ -8587,9 +8068,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    category?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
   export type ProductUpdateWithoutAuthorInput = {
@@ -8664,26 +8142,6 @@ export namespace Prisma {
     session_state?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type TagCreateManyAuthorInput = {
-    id?: string
-    name?: string | null
-  }
-
-  export type TagUpdateWithoutAuthorInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type TagUncheckedUpdateWithoutAuthorInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type TagUncheckedUpdateManyWithoutAuthorInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
 
 
   /**
@@ -8693,10 +8151,6 @@ export namespace Prisma {
      * @deprecated Use UserCountOutputTypeDefaultArgs instead
      */
     export type UserCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserCountOutputTypeDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use PostCountOutputTypeDefaultArgs instead
-     */
-    export type PostCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = PostCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use UserDefaultArgs instead
      */

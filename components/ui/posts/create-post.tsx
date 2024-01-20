@@ -8,7 +8,7 @@ import { useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
-// import { PostSchema } from "@/schemas";
+import { PostSchema } from "@/schemas";
 import { PostSchema2 } from "@/schemas";
 
 import { CardWrapper } from "@/components/auth/card-wrapper";
@@ -41,7 +41,7 @@ export const CreateForm = () => {
 
   const [isPending, startTransition] = useTransition();
 
-  const form = useForm<z.infer<typeof PostSchema2>>({
+  const form = useForm<z.infer<typeof PostSchema>>({
     resolver: zodResolver(PostSchema2),
     defaultValues: {
       title: "",
@@ -69,73 +69,66 @@ export const CreateForm = () => {
   };
 
   return (
-    <CardWrapper
-      headerLabel="Welcome back"
-      backButtonLabel="Don't have an account?"
-      backButtonHref="/auth/register"
-      showSocial
-    >
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <div className="flex flex-col items-center space-y-4">
-            <div className="space-y-4 w-[400px]">
-              {availableTags.map((tag) => (
-                <Button key={tag} className="mx-4">
-                  {tag}
-                </Button>
-              ))}
-            </div>
-            <LocationComponent />
-            <FormField
-              control={form.control}
-              name="title"
-              disabled={isPending}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Title</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      // disabled={isPending}
-                      placeholder="Title"
-                      type="title"
-                      className="space-y-4 w-[400px]"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="description"
-              disabled={isPending}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>description</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      {...field}
-                      // disabled={isPending}
-                      placeholder="Description new"
-                      className="space-y-4 w-[400px]"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <div className="flex flex-col items-center space-y-4">
+          <div className="space-y-4 w-[400px]">
+            {availableTags.map((tag) => (
+              <Button key={tag} className="mx-4">
+                {tag}
+              </Button>
+            ))}
           </div>
-          <button
-            // className="w-full"
-            type="submit"
-            // disabled={isPending}
-            onClick={() => console.log("Clicked")}
-          >
-            Post
-          </button>
-        </form>
-      </Form>
-    </CardWrapper>
+          <LocationComponent />
+          <FormField
+            control={form.control}
+            name="title"
+            disabled={isPending}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Title</FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    // disabled={isPending}
+                    placeholder="Title"
+                    type="title"
+                    className="space-y-4 w-[400px]"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="description"
+            disabled={isPending}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>description</FormLabel>
+                <FormControl>
+                  <Textarea
+                    {...field}
+                    // disabled={isPending}
+                    placeholder="Description new"
+                    className="space-y-4 w-[400px]"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <button
+          // className="w-full"
+          type="submit"
+          // disabled={isPending}
+          onClick={() => console.log("Clicked")}
+        >
+          Post
+        </button>
+      </form>
+    </Form>
   );
 };

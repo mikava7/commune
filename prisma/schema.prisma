@@ -29,11 +29,10 @@ model Post {
   title       String   
   description String     
   image       String     
-  tags        Tag[] 
-  
-  category    String?     
-  location    String?     
-  price       Float?      
+  // tags        Tag[] 
+  // category    String?     
+  // location    String?     
+  // price       Float?      
   author      User?       @relation(fields: [authorId], references: [id])
   authorId    String?
   @@index([authorId], name: "idx_authorId")
@@ -43,7 +42,7 @@ model Tag {
     id          String      @id @default(cuid())
     name String?
     postId   String?
-    author     Post?       @relation(fields: [postId], references: [id])
+    // author     Post?       @relation(fields: [postId], references: [id])
     @@index([postId], name: "idx_postId")
  
 }
