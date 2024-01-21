@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { LoginButton } from "@/components/auth/login-button";
-
+import Link from "next/link";
 export default function Home() {
   return (
     <main className="h-full flex flex-col items-center justify-center min-h-screen">
@@ -14,6 +14,13 @@ export default function Home() {
             login
           </Button>
         </LoginButton>
+        <div>
+          <Link href="create">
+            <Button variant="secondary" size="lg">
+              Create post
+            </Button>
+          </Link>
+        </div>
       </div>
     </main>
   );

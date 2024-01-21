@@ -32,7 +32,7 @@ export const post = async (values: z.infer<typeof PostSchema2>) => {
   }
 
   const { title, description } = validatedFields.data;
-  const image = "/test";
+  const image = "c";
   try {
     await db.post.create({
       data: {

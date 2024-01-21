@@ -43,4 +43,5 @@ export const PostSchema2 = z.object({
   description: z.string().min(1, {
     message: "Description is required",
   }),
+  image: z.any(),
 });

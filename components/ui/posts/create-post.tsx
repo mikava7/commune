@@ -7,7 +7,6 @@ import { useState, useTransition } from "react";
 import { useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
-import { Input } from "@/components/ui/input";
 import { PostSchema } from "@/schemas";
 import { PostSchema2 } from "@/schemas";
 
@@ -15,6 +14,7 @@ import { CardWrapper } from "@/components/auth/card-wrapper";
 import { Button } from "../button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
+import { Input } from "@/components/ui/input";
 import {
   Form,
   FormControl,
@@ -34,8 +34,13 @@ const availableTags = [
   "product",
 ];
 import LocationComponent from "../LocationComponent";
+import { Dialog, DialogContent, DialogTitle } from "@radix-ui/react-dialog";
 
+import { usePathname, useRouter } from "next/navigation";
 export const CreateForm = () => {
+  const pathname = usePathname();
+  const isCreatePage = pathname === "/create";
+  const router = useRouter();
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
 
@@ -50,15 +55,14 @@ export const CreateForm = () => {
       // category: "default",
       // location: "default",
       // price: 0,
-      // image: "default",
+      image: "",
     },
   });
 
   const onSubmit = (values: z.infer<typeof PostSchema2>) => {
     setError("");
     setSuccess("");
-    // console.log("Check if this function invokes or not.");
-    // post(values);
+
     console.log("Form values:", values);
     startTransition(() => {
       post(values).then((data) => {
@@ -69,66 +73,98 @@ export const CreateForm = () => {
   };
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <div className="flex flex-col items-center space-y-4">
-          <div className="space-y-4 w-[400px]">
-            {availableTags.map((tag) => (
-              <Button key={tag} className="mx-4">
-                {tag}
-              </Button>
-            ))}
+    <div>
+      <Dialog open={isCreatePage} onOpenChange={(open) => !open && router.back}>
+        <DialogContent>
+          <DialogTitle>Create new post</DialogTitle>
+
+          <Form {...form}>
+            <form action="" className="space-y-4"></form>
+          </Form>
+        </DialogContent>
+      </Dialog>
+
+      {/* <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <div className="flex flex-col items-center space-y-4">
+            <div className="space-y-4 w-[400px]">
+              {availableTags.map((tag) => (
+                <Button key={tag} className="mx-4">
+                  {tag}
+                </Button>
+              ))}
+            </div>
+            <LocationComponent />
+            <FormField
+              control={form.control}
+              name="title"
+              disabled={isPending}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Title</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      // disabled={isPending}
+                      placeholder="Title"
+                      type="title"
+                      className="space-y-4 w-[400px]"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="description"
+              disabled={isPending}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>description</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      {...field}
+                      // disabled={isPending}
+                      placeholder="Description new"
+                      className="space-y-4 w-[400px]"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="image"
+              disabled={isPending}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="cursor-pointer">upload</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      // disabled={isPending}
+                      placeholder="image"
+                      type="file"
+                      className="space-y-4 w-[400px]"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </div>
-          <LocationComponent />
-          <FormField
-            control={form.control}
-            name="title"
-            disabled={isPending}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Title</FormLabel>
-                <FormControl>
-                  <Input
-                    {...field}
-                    // disabled={isPending}
-                    placeholder="Title"
-                    type="title"
-                    className="space-y-4 w-[400px]"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="description"
-            disabled={isPending}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>description</FormLabel>
-                <FormControl>
-                  <Textarea
-                    {...field}
-                    // disabled={isPending}
-                    placeholder="Description new"
-                    className="space-y-4 w-[400px]"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-        <button
-          // className="w-full"
-          type="submit"
-          // disabled={isPending}
-          onClick={() => console.log("Clicked")}
-        >
-          Post
-        </button>
-      </form>
-    </Form>
+          <button
+            // className="w-full"
+            type="submit"
+            // disabled={isPending}
+            onClick={() => console.log("Clicked")}
+          >
+            Post
+          </button>
+        </form>
+      </Form> */}
+    </div>
   );
 };
