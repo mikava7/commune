@@ -32,8 +32,9 @@ export const post = async (values: z.infer<typeof PostSchema2>) => {
     return { error: "Invalid fields!" };
   }
 
-  const { title, description } = validatedFields.data;
-  const image = "c";
+  const { title, description, image } = validatedFields.data;
+  console.log("imageimage", image);
+
   try {
     await db.post.create({
       data: {
@@ -55,7 +56,43 @@ export const post = async (values: z.infer<typeof PostSchema2>) => {
   } finally {
     await db.$disconnect();
     // Commenting out revalidatePath and redirect for now
-    revalidatePath("/");
-    redirect("/");
+    revalidatePath("/posts");
+    redirect("/posts");
   }
 };
+
+export async function getPosts() {
+  try {
+    const posts = await db.post.findMany({
+      orderBy: {
+        createdAt: "desc", // Sorting by the createdAt field in descending order
+      },
+    });
+    return posts;
+  } catch (error: any) {
+    throw new Error("Failed to fetch posts: " + error.message);
+  } finally {
+    // Disconnect the Prisma client to release the database connection
+    await db.$disconnect();
+  }
+}
+
+export async function deletePost(id: string) {
+  console.log("id in deletePost", id);
+
+  try {
+    await db.post.delete({
+      where: {
+        id,
+      },
+    });
+    return { message: "Post deleted successfully" };
+  } catch (error) {
+    return { errors: { message: "Failed to delete post." } };
+  } finally {
+    // Disconnect from Prisma and trigger revalidation and redirection
+    await prisma.$disconnect();
+    revalidatePath("/posts/");
+    redirect("/posts/");
+  }
+}

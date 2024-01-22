@@ -5,12 +5,9 @@ import * as z from "zod";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { useState, useTransition } from "react";
-import { useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
-import { PostSchema } from "@/schemas";
+
 import { PostSchema2 } from "@/schemas";
-import { CardWrapper } from "@/components/auth/card-wrapper";
 import { Button } from "../button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
@@ -24,7 +21,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Textarea } from "../textarea";
-import { post } from "@/actions/post";
+import { post } from "@/actions/posts";
 import { UploadButton, OurFileRouter } from "@uploadthing/react";
 const availableTags = [
   "post",
@@ -60,8 +57,9 @@ export const CreateForm = () => {
       image: undefined,
     },
   });
-
+  // console.log("form", form);
   const image = form.watch("image");
+  // console.log("image", image);
 
   const onSubmit = (values: z.infer<typeof PostSchema2>) => {
     setError("");
@@ -78,7 +76,10 @@ export const CreateForm = () => {
 
   return (
     <div className="h-full flex items-center justify-center">
-      <Dialog open={isCreatePage} onOpenChange={(open) => !open && router.back}>
+      <Dialog
+        open={isCreatePage}
+        //  onOpenChange={(open) => !open && router.back}
+      >
         <DialogContent>
           <DialogTitle>Create new post</DialogTitle>
 
@@ -88,179 +89,86 @@ export const CreateForm = () => {
               className="space-y-4"
               onSubmit={form.handleSubmit(onSubmit)}
             >
-              {!!image ? (
-                <div className="h-96 md:h-[450] overflow-hidden rounded-md">
-                  <AspectRatio>
-                    <Image
-                      src={image}
-                      alt="Post preview"
-                      fill
-                      className="rounded-md object-cover"
-                    />
-                  </AspectRatio>
-                </div>
-              ) : (
-                <>
-                  <FormField
-                    control={form.control}
-                    name="image"
-                    render={({ field, fieldState }) => (
-                      <FormItem>
-                        <FormLabel htmlFor="picture">Picture</FormLabel>
-                        <FormControl>
-                          <UploadButton<OurFileRouter, "imageUploader">
-                            endpoint="imageUploader"
-                            onClientUploadComplete={(res) => {
-                              // Do something with the response
-                              console.log("Files: ", res);
-                              alert("Upload Completed");
-                            }}
-                            onUploadError={(error: Error) => {
-                              // Do something with the error.
-                              alert(`ERROR! ${error.message}`);
-                            }}
-                          />
-                        </FormControl>
+              {/* Render text fields (title and description) */}
+              <FormField
+                control={form.control}
+                name="title"
+                disabled={isPending}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Title</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="Title"
+                        type="title"
+                        className="space-y-4 w-[400px]"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="description"
+                disabled={isPending}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Description</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        {...field}
+                        placeholder="Description"
+                        className="space-y-4 w-[400px]"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-                        <FormMessage />
-                      </FormItem>
-                    )}
+              <FormField
+                control={form.control}
+                name="image"
+                render={({ field, fieldState }) => (
+                  <FormItem>
+                    <FormLabel htmlFor="picture">Picture</FormLabel>
+                    <FormControl>
+                      <UploadButton<OurFileRouter, "imageUploader">
+                        endpoint="imageUploader"
+                        onClientUploadComplete={(res) => {
+                          form.setValue("image", res[0].url);
+                        }}
+                        onUploadError={(error: Error) => {
+                          alert(`ERROR! ${error.message}`);
+                        }}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {!!image && (
+                <div className="h-96 md:h-[450] overflow-hidden rounded-md">
+                  <img
+                    src={image}
+                    alt="Post preview"
+                    width={400}
+                    height={400}
                   />
-                  <FormField
-                    control={form.control}
-                    name="title"
-                    disabled={isPending}
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Title</FormLabel>
-                        <FormControl>
-                          <Input
-                            {...field}
-                            // disabled={isPending}
-                            placeholder="Title"
-                            type="title"
-                            className="space-y-4 w-[400px]"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="description"
-                    disabled={isPending}
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>description</FormLabel>
-                        <FormControl>
-                          <Textarea
-                            {...field}
-                            // disabled={isPending}
-                            placeholder="Description new"
-                            className="space-y-4 w-[400px]"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </>
+                </div>
               )}
-              <Button
-                // className="w-full"
-                type="submit"
-                // disabled={isPending}
-                onClick={() => console.log("Clicked")}
-              >
+
+              <Button type="submit" onClick={() => console.log("Clicked")}>
                 Post
               </Button>
+              {}
             </form>
           </Form>
         </DialogContent>
       </Dialog>
-
-      {/* <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <div className="flex flex-col items-center space-y-4">
-            <div className="space-y-4 w-[400px]">
-              {availableTags.map((tag) => (
-                <Button key={tag} className="mx-4">
-                  {tag}
-                </Button>
-              ))}
-            </div>
-            <LocationComponent />
-            <FormField
-              control={form.control}
-              name="title"
-              disabled={isPending}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Title</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      // disabled={isPending}
-                      placeholder="Title"
-                      type="title"
-                      className="space-y-4 w-[400px]"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="description"
-              disabled={isPending}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>description</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      {...field}
-                      // disabled={isPending}
-                      placeholder="Description new"
-                      className="space-y-4 w-[400px]"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="image"
-              disabled={isPending}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="cursor-pointer">upload</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      // disabled={isPending}
-                      placeholder="image"
-                      type="file"
-                      className="space-y-4 w-[400px]"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <button
-            // className="w-full"
-            type="submit"
-            // disabled={isPending}
-            onClick={() => console.log("Clicked")}
-          >
-            Post
-          </button>
-        </form>
-      </Form> */}
     </div>
   );
 };
