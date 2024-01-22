@@ -25,6 +25,7 @@ export const post = async (values: z.infer<typeof PostSchema2>) => {
 
   console.log(values);
   const validatedFields = PostSchema2.safeParse(values);
+
   console.log("validatedFields", validatedFields);
 
   if (validatedFields.success !== true || !validatedFields.data) {
