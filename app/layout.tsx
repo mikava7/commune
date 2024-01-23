@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import NavBar from "@/components/navbar";
+import AuthenticationButton from "@/components/auth/authentication-button";
+
 import { ourFileRouter } from "./api/uploadthing/core";
 import "./globals.css";
 // import { db } from "@/lib/db";
@@ -18,12 +20,14 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // const user = await db.user.findMany({});
-  // console.log(user);
+
   return (
     <html lang="en">
       <body className={inter.className}>
-        <NavBar />
+        <NavBar>
+          <AuthenticationButton />
+        </NavBar>
+        {/* <NavBar/> */}
         <main className="px-8 py-20 max-w-6xl mx-auto"> {children}</main>
       </body>
     </html>
