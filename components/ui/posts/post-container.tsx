@@ -1,6 +1,7 @@
 "use client";
 // import { Post } from "@/app/lib/definitions";
 import { DeletePost, EditPost } from "./buttons";
+import { auth } from "@/auth";
 import Image from "next/image";
 import Link from "next/link";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
@@ -14,7 +15,7 @@ type Post = {
 const PostContainer = ({ posts }: { posts: Post }) => {
   const { title, description, image } = posts;
   // console.log("posts in", posts);
-
+  // const session = await auth();
   return (
     <div className="flex flex-col justify-center items-center">
       {" "}
@@ -55,7 +56,7 @@ const PostContainer = ({ posts }: { posts: Post }) => {
               )}
             </div>
             <div className="flex justify-center m-4 gap-3">
-              <DeletePost id={post.id} />
+              <DeletePost id={post.id} userId={post.authorId} />
               {/* <EditPost id={post.id} /> */}
             </div>
             <br />

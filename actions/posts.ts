@@ -77,17 +77,37 @@ export async function getPosts() {
   }
 }
 
-export async function deletePost(id: string) {
-  console.log("id in deletePost", id);
-
+export async function deletePost(id: string, userId: string | undefined) {
   try {
+    // Fetch the post details
+    const post = await db.post.findUnique({
+      where: {
+        id,
+      },
+      select: {
+        authorId: true,
+      },
+    });
+
+    if (!post) {
+      return { errors: { message: "Post not found." } };
+    }
+
+    // Check if the logged-in user is the author of the post
+    if (post.authorId !== userId) {
+      return { errors: { message: "You do not have permission to delete this post." } };
+    }
+
+    // Delete the post if the checks pass
     await db.post.delete({
       where: {
         id,
       },
     });
+
     return { message: "Post deleted successfully" };
   } catch (error) {
+    console.error("Error deleting post:", error);
     return { errors: { message: "Failed to delete post." } };
   } finally {
     // Disconnect from Prisma and trigger revalidation and redirection
@@ -96,3 +116,4 @@ export async function deletePost(id: string) {
     redirect("/posts/");
   }
 }
+

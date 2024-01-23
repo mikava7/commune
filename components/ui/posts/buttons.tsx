@@ -13,9 +13,16 @@ export function EditPost({ id }: { id: string }) {
   );
 }
 
-export function DeletePost({ id }: { id: string }) {
-  const deletePostWithId = deletePost.bind(null, id);
+export function DeletePost({
+  id,
+  userId,
+}: {
+  id: string;
+  userId: string | undefined;
+}) {
+  const deletePostWithId = deletePost.bind(null, id, userId);
   console.log("id in deletePost", id);
+
   return (
     <form action={deletePostWithId}>
       <button className="rounded-md border p-2 hover:bg-gray-700">

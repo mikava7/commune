@@ -40,8 +40,13 @@ export const PostSchema2 = z.object({
   title: z.string().min(1, {
     message: "Title is required",
   }),
-  description: z.string().min(1, {
-    message: "Description is required",
-  }),
+  description: z
+    .string()
+    .min(10, {
+      message: "Description must be at least 10 characters.",
+    })
+    .max(1000, {
+      message: "Description must not be longer than 1000 characters.",
+    }),
   image: z.string().url(),
 });

@@ -1,10 +1,10 @@
 import { getPosts } from "@/actions/posts";
-// import { Post } from "../lib/definitions";
+import { Post } from "@/lib/definitions";
 import PostFeed from "@/components/ui/posts/post-feed";
 import Link from "next/link";
 
 export default async function page() {
-  const posts = await getPosts();
+  const posts: Promise<Post> = await getPosts();
   console.log("posts", posts);
   return (
     <div>
