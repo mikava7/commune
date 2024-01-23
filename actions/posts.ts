@@ -77,25 +77,29 @@ export async function getPosts() {
   }
 }
 
-export async function deletePost(id: string, userId: string | undefined) {
+export async function deletePost(id: string) {
+  const session = await auth();
+  const userId = session?.user?.id;
+
   try {
     // Fetch the post details
     const post = await db.post.findUnique({
       where: {
         id,
       },
-      select: {
-        authorId: true,
-      },
     });
 
     if (!post) {
       return { errors: { message: "Post not found." } };
     }
+    // console.log("post", post);
+
+    // console.log("authorId before condition:", post?.authorId);
+    // console.log("userId before condition:", userId);
 
     // Check if the logged-in user is the author of the post
     if (post.authorId !== userId) {
-      return { errors: { message: "You do not have permission to delete this post." } };
+      throw new Error("You do not have permission to delete this post.");
     }
 
     // Delete the post if the checks pass
@@ -111,9 +115,8 @@ export async function deletePost(id: string, userId: string | undefined) {
     return { errors: { message: "Failed to delete post." } };
   } finally {
     // Disconnect from Prisma and trigger revalidation and redirection
-    await prisma.$disconnect();
+    await db.$disconnect();
     revalidatePath("/posts/");
     redirect("/posts/");
   }
 }
-

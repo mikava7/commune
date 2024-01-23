@@ -1,10 +1,25 @@
 "use client";
-import { Post } from "@/lib/definitions";
 import PostContainer from "./post-container";
-export default function PostFeed({ posts }: { posts: Post }) {
+import Link from "next/link";
+import { Session } from "@/lib/definitions";
+type Post = {
+  [x: string]: any;
+  title: string;
+  description: string;
+  image: string;
+  authorId: string;
+};
+export default function PostFeed({
+  posts,
+  session,
+}: {
+  posts: Post;
+  session: Session | null;
+}) {
   return (
     <>
-      <PostContainer posts={posts} />
+      <Link href="/auth/login">login</Link>
+      <PostContainer posts={posts} session={session} />
     </>
   );
 }

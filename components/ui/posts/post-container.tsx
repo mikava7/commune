@@ -5,17 +5,26 @@ import { auth } from "@/auth";
 import Image from "next/image";
 import Link from "next/link";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
+import { Session } from "@/lib/definitions";
 type Post = {
   [x: string]: any;
   title: string;
   description: string;
   image: string;
+  authorId: string;
 };
 
-const PostContainer = ({ posts }: { posts: Post }) => {
+const PostContainer = ({
+  posts,
+  session,
+}: {
+  posts: Post;
+  session: Session | null | undefined;
+}) => {
   const { title, description, image } = posts;
-  // console.log("posts in", posts);
-  // const session = await auth();
+
+  const userId = session?.user?.id;
+
   return (
     <div className="flex flex-col justify-center items-center">
       {" "}
@@ -25,6 +34,7 @@ const PostContainer = ({ posts }: { posts: Post }) => {
           title: string;
           description: string;
           image: string;
+          authorId: string;
         }) => (
           <div
             className="max-w-md w-full mx-4 my-6 p-4 bg-white border rounded-md shadow-md"
@@ -55,10 +65,12 @@ const PostContainer = ({ posts }: { posts: Post }) => {
                 </AspectRatio>
               )}
             </div>
-            <div className="flex justify-center m-4 gap-3">
-              <DeletePost id={post.id} userId={post.authorId} />
-              {/* <EditPost id={post.id} /> */}
-            </div>
+            {post?.authorId == userId && (
+              <div className="flex justify-center m-4 gap-3">
+                <DeletePost id={post.id} />
+                {/* <EditPost id={post.id} /> */}
+              </div>
+            )}
             <br />
           </div>
         )

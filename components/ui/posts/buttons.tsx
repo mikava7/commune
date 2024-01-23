@@ -13,14 +13,8 @@ export function EditPost({ id }: { id: string }) {
   );
 }
 
-export function DeletePost({
-  id,
-  userId,
-}: {
-  id: string;
-  userId: string | undefined;
-}) {
-  const deletePostWithId = deletePost.bind(null, id, userId);
+export function DeletePost({ id }: { id: string }) {
+  const deletePostWithId = deletePost.bind(null, id);
   console.log("id in deletePost", id);
 
   return (

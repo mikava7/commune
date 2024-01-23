@@ -1,14 +1,12 @@
-export type Book = {
-  id: number;
-  author: string;
-  country: string;
-  link: string;
-  imageLink: string;
-  language: string;
-  pages: number;
-  title: string;
-  year: number;
-};
+export interface LoggedInUser {
+  name: string;
+  email: string;
+  id: string;
+}
+
+export interface Session {
+  user: LoggedInUser | null;
+}
 
 export type Member = {
   id: number;
