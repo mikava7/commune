@@ -1,21 +1,18 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import links from "@/lib/menu-items";
+import { navbarLinks } from "@/lib/menu-items";
 import { usePathname } from "next/navigation";
-import AuthenticationButton from "./auth/authentication-button";
+import FormLinks from "./ui/posts/form-links";
 export default function NavBar({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [hoveredLink, setHoveredLink] = useState("");
 
   return (
     <nav className="bg-blue-500 py-4 border-b border-blue-700 lg:px-8">
       <div className="flex items-center justify-between px-4 sm:px-0 max-w-6xl mx-auto">
-        <Link href="/home">
-          <span className="cursor-pointer text-white text-lg font-semibold">
-            Commune Connect
-          </span>
-        </Link>
+        <Link href="/">Commune Connect</Link>
         {/* Responsive Menu Button for Small Screens */}
         <button
           className="sm:hidden text-white focus:outline-none"
@@ -26,7 +23,7 @@ export default function NavBar({ children }: { children: React.ReactNode }) {
 
         {/* Menu for Large Screens */}
         <ul className={`menu menu-horizontal hidden sm:flex space-x-4`}>
-          {links.map((link) => (
+          {navbarLinks.map((link) => (
             <li key={link.href} className="cursor-pointer">
               <Link href={link.href}>
                 <button
@@ -39,6 +36,9 @@ export default function NavBar({ children }: { children: React.ReactNode }) {
                   {link.label}
                 </button>
               </Link>
+
+              {/* Conditionally render sublinks (FormLinks) based on hover */}
+              {/* {link.href === "/create" && <FormLinks />} */}
             </li>
           ))}
         </ul>
@@ -48,7 +48,7 @@ export default function NavBar({ children }: { children: React.ReactNode }) {
         {menuOpen && (
           <div className="sm:hidden absolute top-16 left-4 right-4 bg-white p-4 rounded shadow-md">
             <ul className="flex flex-col space-y-2">
-              {links.map((link) => (
+              {navbarLinks.map((link) => (
                 <li key={link.href} className="cursor-pointer">
                   <Link href={link.href}>
                     <button

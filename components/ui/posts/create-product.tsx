@@ -30,7 +30,7 @@ import { Dialog, DialogContent, DialogTitle } from "@radix-ui/react-dialog";
 import { usePathname, useRouter } from "next/navigation";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import FormLinks from "./form-links";
-export const CreateForm = () => {
+export const CreateProduct = () => {
   const pathname = usePathname();
   const isCreatePage = pathname === "/create";
   const router = useRouter();
@@ -77,6 +77,13 @@ export const CreateForm = () => {
           className="space-y-4"
           onSubmit={form.handleSubmit(onSubmit)}
         >
+          <label htmlFor="price">Select price:</label>
+          <select id="price" name="price">
+            <option value="free">Free</option>
+            <option value="exchange">Exchange</option>
+            <option value="custom">Custom</option>
+          </select>
+
           {/* Render text fields (title and description) */}
           <FormField
             control={form.control}
