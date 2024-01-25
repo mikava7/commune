@@ -4,6 +4,8 @@ import {
   AcademicCapIcon,
   TruckIcon,
   UsersIcon,
+  FilmIcon,
+  PhoneIcon,
 } from "@heroicons/react/24/solid";
 
 export const listingTypes = [
@@ -38,3 +40,33 @@ export const listingTypes = [
     link: "/create/event",
   },
 ];
+
+export const categories = [
+  {
+    category: "Home & Garden",
+    icon: <HomeIcon className="h-4 w-4" />,
+    subCategories: [
+      "Furniture",
+      "Gardening",
+      "Decor" /* Add more subcategories */,
+    ],
+  },
+  {
+    category: "Entertainment",
+    icon: <FilmIcon className="h-4 w-4 border border-red-950" />,
+    subCategories: ["Movies", "Music", "Games" /* Add more subcategories */],
+  },
+  {
+    category: "Clothing & Accessories",
+    icon: <ShoppingCartIcon className="h-4 w-4" />,
+    subCategories: ["Clothing", "Shoes", "Accessories"],
+  },
+  {
+    category: "Electronics",
+    icon: <PhoneIcon className="h-4 w-4" />,
+    subCategories: ["Smartphones", "Laptops", "Gadgets"],
+  },
+  // Add more categories as needed
+];
+
+export const conditions = ["new", "Used - Like New", "Used - Good", "Used - Fair"];

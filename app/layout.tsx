@@ -20,7 +20,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -28,7 +27,7 @@ export default async function RootLayout({
           <AuthenticationButton />
         </NavBar>
         {/* <NavBar/> */}
-        <main className="px-8 py-20 max-w-6xl mx-auto"> {children}</main>
+        <main className=""> {children}</main>
       </body>
     </html>
   );

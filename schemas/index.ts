@@ -36,6 +36,7 @@ export const PostSchema = z.object({
     message: "Price must be a non-negative number",
   }),
 });
+
 export const PostSchema2 = z.object({
   title: z.string().min(1, {
     message: "Title is required",
@@ -47,6 +48,19 @@ export const PostSchema2 = z.object({
     })
     .max(1000, {
       message: "Description must not be longer than 1000 characters.",
-    }),
+    })
+    .optional(),
   image: z.string().url(),
 });
+
+export const ProductShema = PostSchema2.merge(
+  z.object({
+    // Add additional properties specific to ProductShema
+    price: z
+      .number()
+      .min(0, { message: "Price must be a non-negative number." }),
+    condition: z.string().optional(),
+    category: z.string().optional(),
+    location: z.string().optional(),
+  })
+);

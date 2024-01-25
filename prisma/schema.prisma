@@ -27,12 +27,9 @@ model Post {
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   title       String   
-  description String     @db.VarChar(200)
+  description String?    @db.VarChar(200)
   image       String     
-  // tags        Tag[] 
-  // category    String?     
-  // location    String?     
-  // price       Float?      
+  
   author      User?       @relation(fields: [authorId], references: [id])
   authorId    String?
   @@index([authorId], name: "idx_authorId")
@@ -47,23 +44,38 @@ model Tag {
  
 }
 model Product {
-  id            String    @id @default(cuid())
-  name        String?
+  id           String    @id @default(cuid())
+  title        String
   description String?
-  price       Decimal?  
+  price   Decimal?  
+  image   String? 
+  location String?
   authorId   String?
   author     User?       @relation(fields: [authorId], references: [id])
+  categoryId   String?
+  category     Category?       @relation(fields: [categoryId], references: [id])
+  conditionId   String?
+  condition     Condition?       @relation(fields: [conditionId], references: [id])
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
-  imageLink   String?
   @@index([authorId], name: "idx_authorId")
+  @@index([categoryId], name: "idx_categoryId")
+  @@index([conditionId], name: "idx_conditionId")
 
 }
-enum PostType {
-  POST
-  PRODUCT_DECLARATION
-  SERVICE_DECALARATION
-  GATHERING_ANNOUNCEMENT
+
+model Category{
+  id    String    @id @default(cuid())
+  title String
+  product Product[]
+}
+
+
+model Condition {
+  id   String    @id @default(cuid())
+  title String
+  product Product[]
+
 }
 model Account {
   id            String    @id @default(cuid())

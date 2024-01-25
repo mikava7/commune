@@ -18,22 +18,17 @@ type PostCreateInput = {
   };
 };
 
-export const post = async (values: z.infer<typeof PostSchema2>) => {
+export const createPost = async (values: z.infer<typeof PostSchema2>) => {
   const session = await auth();
   const userId: string | undefined = session?.user?.id;
-  console.log("session", session);
 
-  console.log(values);
   const validatedFields = PostSchema2.safeParse(values);
-
-  console.log("validatedFields", validatedFields);
 
   if (validatedFields.success !== true || !validatedFields.data) {
     return { error: "Invalid fields!" };
   }
 
   const { title, description, image } = validatedFields.data;
-  console.log("imageimage", image);
 
   try {
     await db.post.create({

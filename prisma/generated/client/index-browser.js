@@ -134,13 +134,26 @@ exports.Prisma.TagScalarFieldEnum = {
 
 exports.Prisma.ProductScalarFieldEnum = {
   id: 'id',
-  name: 'name',
+  title: 'title',
   description: 'description',
   price: 'price',
+  image: 'image',
+  location: 'location',
   authorId: 'authorId',
+  categoryId: 'categoryId',
+  conditionId: 'conditionId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  imageLink: 'imageLink'
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CategoryScalarFieldEnum = {
+  id: 'id',
+  title: 'title'
+};
+
+exports.Prisma.ConditionScalarFieldEnum = {
+  id: 'id',
+  title: 'title'
 };
 
 exports.Prisma.AccountScalarFieldEnum = {
@@ -174,6 +187,8 @@ exports.Prisma.ModelName = {
   Post: 'Post',
   Tag: 'Tag',
   Product: 'Product',
+  Category: 'Category',
+  Condition: 'Condition',
   Account: 'Account'
 };
 

@@ -21,7 +21,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Textarea } from "../textarea";
-import { post } from "@/actions/posts";
 import { UploadButton, OurFileRouter } from "@uploadthing/react";
 
 import LocationComponent from "../LocationComponent";
@@ -30,6 +29,9 @@ import { Dialog, DialogContent, DialogTitle } from "@radix-ui/react-dialog";
 import { usePathname, useRouter } from "next/navigation";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import FormLinks from "./form-links";
+
+import { createPost } from "@/actions/posts";
+
 export const CreateForm = () => {
   const pathname = usePathname();
   const isCreatePage = pathname === "/create";
@@ -44,10 +46,6 @@ export const CreateForm = () => {
     defaultValues: {
       title: "",
       description: "",
-      // tags: ["post"],
-      // category: "default",
-      // location: "default",
-      // price: 0,
       image: undefined,
     },
   });
@@ -61,7 +59,7 @@ export const CreateForm = () => {
 
     console.log("Form values:", values);
     startTransition(() => {
-      post(values).then((data) => {
+      createPost(values).then((data) => {
         setError(data?.error);
         setSuccess(data?.success);
       });

@@ -10,9 +10,9 @@ import { listingTypes } from "@/lib/listing-type";
 import Link from "next/link";
 export default function Postypes() {
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-4 mx-4">
       {listingTypes.map((type) => (
-        <Link href={type.link}>
+        <Link href={type.link} key={type.title}>
           <Card
             key={type.title}
             className="w-54 h-60 bg-slate-100 flex flex-col items-center"
