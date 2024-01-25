@@ -3,18 +3,11 @@ import PostFeed from "@/components/ui/posts/post-feed";
 import Link from "next/link";
 import { auth, signOut } from "@/auth";
 import { Button } from "@/components/ui/button";
-import { Post } from "@/lib/definitions";
-
-interface User {
-  id: string;
-}
-interface CustomSession {
-  user?: User | null;
-}
+import { Post, CustomSession } from "@/lib/definitions";
 
 export default async function page() {
-  const session: CustomSession = (await auth())!;
-
+  const session: CustomSession = auth() as unknown as CustomSession;
+  // console.log("session in post", session);
   const posts: Post[] = await getPosts();
   return (
     <div>

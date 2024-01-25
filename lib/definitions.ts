@@ -4,8 +4,9 @@ export interface LoggedInUser {
   id: string;
 }
 
-export interface Session {
-  user: LoggedInUser | null | undefined;
+export interface CustomSession {
+  user: LoggedInUser | null;
+  expires: string;
 }
 
 export type Member = {

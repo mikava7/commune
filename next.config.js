@@ -3,7 +3,7 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        hostname: "",
+        hostname: "frang.ge",
         protocol: "https",
       },
     ],

@@ -21,8 +21,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Textarea } from "../textarea";
-import { UploadButton, OurFileRouter } from "@uploadthing/react";
-
+import { UploadButton } from "@uploadthing/react";
+import { OurFileRouter } from "@/app/api/uploadthing/core";
 import LocationComponent from "../LocationComponent";
 import { Dialog, DialogContent, DialogTitle } from "@radix-ui/react-dialog";
 

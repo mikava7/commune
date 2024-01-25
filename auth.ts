@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+import NextAuth, { Session } from "next-auth";
 import authConfig from "./auth.config";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
@@ -15,8 +15,8 @@ export const {
     error: "/auth/error",
   },
   callbacks: {
-    async session({ session, token }) {
-      if (token.sub && session.user) {
+    async session({ session, token }: { session: Session; token?: any }) {
+      if (token && token.sub && session.user) {
         session.user.id = token.sub;
       }
       return session;
@@ -26,6 +26,7 @@ export const {
       return token;
     },
   },
+
   adapter: PrismaAdapter(db),
   session: { strategy: "jwt" },
   ...authConfig,

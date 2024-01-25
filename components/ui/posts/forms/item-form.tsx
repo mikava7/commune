@@ -36,8 +36,8 @@ import {
 
 import { Textarea } from "../../textarea";
 import { createProduct } from "@/actions/product";
-import { UploadButton, OurFileRouter } from "@uploadthing/react";
-
+import { UploadButton } from "@uploadthing/react";
+import { OurFileRouter } from "@/app/api/uploadthing/core";
 import { usePathname, useRouter } from "next/navigation";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { categories, conditions } from "@/lib/listing-type";

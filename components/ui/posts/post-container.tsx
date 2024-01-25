@@ -5,13 +5,8 @@ import { auth } from "@/auth";
 import Image from "next/image";
 import Link from "next/link";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
-import { Post, Session } from "@/lib/definitions";
-interface User {
-  id: string;
-}
-interface CustomSession {
-  user?: User | null;
-}
+import { Post, CustomSession } from "@/lib/definitions";
+
 const PostContainer = ({
   posts,
   session,
