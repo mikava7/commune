@@ -48,7 +48,7 @@ export const createProduct = async (values: z.infer<typeof ProductShema>) => {
     console.log("Product listed successfully");
     return { success: "Product listed successfully" };
   } catch (error) {
-    console.error("Error creating post:", error);
+    console.error("Error listing product:", error);
     return { error: "Failed to list product." };
   } finally {
     await db.$disconnect();

@@ -41,6 +41,7 @@ import { UploadButton, OurFileRouter } from "@uploadthing/react";
 import { usePathname, useRouter } from "next/navigation";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { categories, conditions } from "@/lib/listing-type";
+
 export const CreateItem = () => {
   const pathname = usePathname();
   const isCreatePage = pathname === "/create";

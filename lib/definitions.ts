@@ -5,7 +5,7 @@ export interface LoggedInUser {
 }
 
 export interface Session {
-  user: LoggedInUser | null;
+  user: LoggedInUser | null | undefined;
 }
 
 export type Member = {
@@ -33,17 +33,15 @@ export enum Role {
 }
 
 export type Post = {
-  id: string;
   [x: string]: any;
+  id: string;
   title: string;
-  description: string;
+  description: string | null;
   image: string;
   createdAt: Date;
   updatedAt: Date;
-  author: Member;
-  authorId: number;
+  authorId: string | null;
 };
-
 // Define TypeScript type for the Profile model
 export type Profile = {
   id?: number;

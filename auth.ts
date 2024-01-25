@@ -15,10 +15,11 @@ export const {
     error: "/auth/error",
   },
   callbacks: {
-    async session({ token, session }) {
+    async session({ session, token }) {
       if (token.sub && session.user) {
         session.user.id = token.sub;
       }
+      return session;
     },
     async jwt({ token }) {
       // console.log({ token });

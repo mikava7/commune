@@ -136,11 +136,11 @@ export const CreateForm = () => {
             )}
           />
 
-          {!!image && (
+          {/* {!!image && (
             <div className="h-96 md:h-[450] overflow-hidden rounded-md">
               <img src={image} alt="Post preview" width={400} height={400} />
             </div>
-          )}
+          )} */}
 
           <Button type="submit" onClick={() => console.log("Clicked")}>
             Post

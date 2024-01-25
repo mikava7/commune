@@ -1,9 +1,9 @@
 import { getPosts } from "@/actions/posts";
-import { Post } from "@/lib/definitions";
 import PostFeed from "@/components/ui/posts/post-feed";
 import Link from "next/link";
 import { auth, signOut } from "@/auth";
 import { Button } from "@/components/ui/button";
+import { Post } from "@/lib/definitions";
 
 interface User {
   id: string;
@@ -14,9 +14,8 @@ interface CustomSession {
 
 export default async function page() {
   const session: CustomSession = (await auth())!;
-  console.log("session", session);
-  const posts: Promise<Post> = await getPosts();
-  // console.log("posts", posts);
+
+  const posts: Post[] = await getPosts();
   return (
     <div>
       <form
@@ -26,7 +25,7 @@ export default async function page() {
         }}
       >
         <Button>
-          <div >Sign Out</div>
+          <div>Sign Out</div>
         </Button>
       </form>
       <Link href={"/create"} className="flex items-center justify-center">
