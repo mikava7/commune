@@ -58,3 +58,15 @@ export type Category = {
   description?: string;
   post: Post[];
 };
+export interface Product {
+  id?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  title: string;
+  description?: string;
+  image: string;
+  price: number;
+  condition?: string;
+  category?: string;
+  location?: string;
+}
