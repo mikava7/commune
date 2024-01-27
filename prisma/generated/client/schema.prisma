@@ -49,6 +49,9 @@ model Product {
   description String?
   price   Decimal?  
   image   String? 
+  images  Images[] 
+  imagesId   String?
+
   location String?
   authorId   String?
   author     User?       @relation(fields: [authorId], references: [id])
@@ -61,9 +64,16 @@ model Product {
   @@index([authorId], name: "idx_authorId")
   @@index([categoryId], name: "idx_categoryId")
   @@index([conditionId], name: "idx_conditionId")
+  @@index([imagesId], name: "idx_imagesId")
 
 }
+model Images{
+  id    String    @id @default(cuid())
+  title String
 
+  product Product[]
+
+}
 model Category{
   id    String    @id @default(cuid())
   title String

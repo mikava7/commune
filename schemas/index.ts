@@ -51,6 +51,7 @@ export const PostSchema2 = z.object({
     })
     .optional(),
   image: z.string().url(),
+  images: z.array(z.string().url()), 
 });
 
 export const ProductShema = PostSchema2.merge(

@@ -61,11 +61,12 @@ export const CreateItem = () => {
       category: "",
       location: "",
       price: 0,
+      images: [],
       image: undefined,
     },
   });
-  const image = form.watch("image");
-
+  const images = form.watch("image");
+  console.log("image", images);
   const onSubmit = (values: z.infer<typeof ProductShema>) => {
     setError("");
     setSuccess("");
@@ -80,7 +81,7 @@ export const CreateItem = () => {
   };
 
   return (
-    <div className="h-full flex">
+    <div className="h-full flex bg-white border border-black">
       <div className="flex flex-col w-1/4 px-4">
         <Form {...form}>
           <div className="my-2">
@@ -95,7 +96,7 @@ export const CreateItem = () => {
             <Card className="h-54">
               <FormField
                 control={form.control}
-                name="image"
+                name="images"
                 render={({ field, fieldState }) => (
                   <FormItem className="bg-gray-200 ">
                     <CardDescription className="py-4 px-2 text-black">
@@ -105,7 +106,11 @@ export const CreateItem = () => {
                       <UploadButton<OurFileRouter, "imageUploader">
                         endpoint="imageUploader"
                         onClientUploadComplete={(res) => {
-                          form.setValue("image", res[0].url);
+                          console.log("res", res);
+                          const newImages = res.map((item) => item.url);
+                          console.log("newImages", newImages);
+
+                          form.setValue("images", newImages);
                         }}
                         onUploadError={(error: Error) => {
                           alert(`ERROR! ${error.message}`);
@@ -129,7 +134,7 @@ export const CreateItem = () => {
                       {...field}
                       placeholder="Title"
                       type="text"
-                      className="space-y-4 w-[300px]"
+                      className="space-y-4 w-[280px]"
                     />
                   </FormControl>
                   <FormMessage />
@@ -289,7 +294,7 @@ export const CreateItem = () => {
           </form>
         </Form>
       </div>
-      <div className="w-3/4">
+      <div className="flex flex-1 justify-center w-full bg-gray-200">
         <ItemPreview values={form.getValues()} />
       </div>
     </div>

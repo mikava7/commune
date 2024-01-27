@@ -69,4 +69,5 @@ export interface Product {
   condition?: string;
   category?: string;
   location?: string;
+  images?: [string];
 }
