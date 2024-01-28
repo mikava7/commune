@@ -66,12 +66,12 @@ export const CreateItem = () => {
     },
   });
   const images = form.watch("image");
-  console.log("image", images);
+  // console.log("image", images);
   const onSubmit = (values: z.infer<typeof ProductShema>) => {
     setError("");
     setSuccess("");
 
-    console.log("Form values:", values);
+    // console.log("Form values:", values);
     startTransition(() => {
       createProduct(values).then((data) => {
         setError(data?.error);

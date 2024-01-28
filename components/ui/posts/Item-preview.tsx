@@ -13,56 +13,54 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import Image from "next/image";
 
 export default function ItemPreview({ values }: { values: Product }) {
-  console.log("values in ItemPreview", values);
+  // console.log("values in ItemPreview", values);
 
   return (
-    
-    <div className="flex flex-col w-9/10 h-4/5 bg-white border border-red-900 mx-5 my-5 rounded-md  ">
-    
-      <CardTitle className="py-5 px-5 ">Preview</CardTitle>
-      <div className="w-9/10 h-9/10 my-5 mx-5  border border-green-900 rounded-md">
+    <div className="itemContainer">
+      <CardTitle className="py-1 ml-2">Preview</CardTitle>
+      <div className=" w-9/10 h-full my-2 mx-2 bg-slate-100 rounded-tl rounded-bl">
         {values && (
-          <div className="flex h-full ">
-            <div className="w-3/4 flex h-full bg-gray-200">
-              {values?.images && values?.images?.length > 0 ? (
-                <Card className="flex h-full bg-slate-200">
-                  <Carousel>
-                    <CarouselContent>
-                      {values.images &&
-                        values?.images?.map((i) => (
-                          <CarouselItem>
-                            <div className="h-96 md:h-[450] overflow-hidden rounded-md">
-                              <img
-                                src={i}
-                                alt="Post preview"
-                                width={400}
-                                height={400}
-                              />
-                            </div>
-                          </CarouselItem>
-                        ))}
-                    </CarouselContent>
-                    <CarouselPrevious />
-                    <CarouselNext />
-                  </Carousel>
-                </Card>
+        <div className="flex h-full w-full rounded-lg">
+        <div className="w-4/6 flex h-full rounded-tl rounded-bl overflow-hidden">
+          {values?.images && values?.images?.length > 0 ? (
+            <Card className="flex h-full bg-slate-200 ">
+              <Carousel>
+                <CarouselContent>
+                  {values.images &&
+                    values?.images?.map((i) => (
+                      <CarouselItem key={i}>
+                        <div className="h-full w-full overflow-hidden rounded-md">
+                          <img
+                            src={i}
+                            alt="Post preview"
+                            className="object-cover w-full h-full"
+                          />
+                        </div>
+                      </CarouselItem>
+                    ))}
+                </CarouselContent>
+                <CarouselPrevious />
+                <CarouselNext />
+              </Carousel>
+            </Card>
               ) : (
-                <Card className="flex flex-col bg-gray-200 items-center justify-center py-5 px-5">
-                  <CardTitle className="text-lg">
+                <Card className="flex flex-col w-full h-full bg-gray-200 items-center justify-center py-5 px-5 ">
+                  <CardTitle className="text-2xl font-bold mb-2">
                     Your Listing Preview
                   </CardTitle>
-                  <CardDescription>
-                    As you create your listing, you can preview
-                    <br />
-                    it will appear to others on Marketplace
+                  <CardDescription className="indent-1 text-xl tracking-normal">
+                    As you create your listing,you can preview
+                    <br className="tracking-wider" />
+                    it will appear to others on Marketplace.
                   </CardDescription>
                 </Card>
               )}
             </div>
 
-            <div className="flex flex-col">
+            <div className="flex flex-col ">
               <div className="w-2/4  border border-red-900">
                 <h2 className="text-blue ml-2">
                   {values.price ? values.price : "Price: "}

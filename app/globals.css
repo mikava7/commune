@@ -85,3 +85,17 @@
   margin: 5px;
   padding: 10px;
 }
+.itemContainer {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  width: 90%;
+  height: 80%;
+  border: 5px solid rgb(182, 182, 182);
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 1rem;
+  @media (max-width: 1280px) {
+    width: 70%;
+  }
+}

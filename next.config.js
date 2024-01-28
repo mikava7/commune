@@ -1,13 +1,13 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+module.exports = {
   images: {
     remotePatterns: [
       {
-        hostname: "frang.ge",
         protocol: "https",
+        hostname: "assets.example.com",
+        port: "",
+        pathname: "/account123/**",
       },
     ],
   },
 };
-
-module.exports = nextConfig;
