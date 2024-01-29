@@ -294,7 +294,7 @@ export const CreateItem = () => {
           </form>
         </Form>
       </div>
-      <div className="flex flex-1 justify-center w-full bg-gray-200">
+      <div className="flex flex-1 justify-center w-full bg-gray-200 border-9 border-red-900">
         <ItemPreview values={form.getValues()} />
       </div>
     </div>
