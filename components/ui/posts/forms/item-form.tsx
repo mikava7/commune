@@ -1,5 +1,4 @@
 "use client";
-import { auth, signOut } from "@/auth";
 
 import * as z from "zod";
 import Image from "next/image";
@@ -82,7 +81,7 @@ export const CreateItem = () => {
 
   return (
     <div className="h-full flex bg-white border border-black">
-      <div className="flex flex-col w-1/4 px-4">
+      <div className={`container`}>
         <Form {...form}>
           <div className="my-2">
             <CardTitle>Required</CardTitle>
@@ -134,7 +133,7 @@ export const CreateItem = () => {
                       {...field}
                       placeholder="Title"
                       type="text"
-                      className="space-y-4 w-[280px]"
+                      className="space-y-8 h-14 py-4 border border-gray-300 transition-all duration-300 hover:border-black focus:border-blue-500 focus:border-2 focus:border-solid "
                     />
                   </FormControl>
                   <FormMessage />
@@ -154,7 +153,7 @@ export const CreateItem = () => {
                       placeholder="Price"
                       type="number"
                       defaultValue=""
-                      className="space-y-4 w-[300px]"
+                      className="space-y-8 h-14 py-4 border border-gray-300 transition-all duration-300 hover:border-black focus:border-blue-500 focus:border-2 focus:border-solid "
                       onChange={(event) =>
                         field.onChange(parseFloat(event.target.value))
                       }
@@ -172,7 +171,7 @@ export const CreateItem = () => {
               render={({ field }) => (
                 <FormItem>
                   <Select onValueChange={field.onChange}>
-                    <FormControl>
+                    <FormControl className="h-14 text-[20px] text-gray-600 border border-gray-300 transition-all duration-300 hover:border-black focus:border-blue-500 focus:border-2 focus:border-solid">
                       <SelectTrigger>
                         <SelectValue placeholder="Category" />
                       </SelectTrigger>
@@ -181,7 +180,7 @@ export const CreateItem = () => {
                       {categories.map((item) => (
                         <SelectItem
                           value={item.category}
-                          className="flex items-center space-x-2"
+                          className="flex h-14 items-center space-x-2 "
                           key={item.category}
                         >
                           <div className="flex items-center space-x-2 cursor-pointer">
@@ -207,7 +206,7 @@ export const CreateItem = () => {
               render={({ field }) => (
                 <FormItem>
                   <Select onValueChange={field.onChange}>
-                    <FormControl>
+                    <FormControl className="h-14 text-[20px] text-gray-600 border border-gray-300 transition-all duration-300 hover:border-black focus:border-blue-500 focus:border-2 focus:border-solid">
                       <SelectTrigger>
                         <SelectValue placeholder="Condition" />
                       </SelectTrigger>
@@ -216,7 +215,7 @@ export const CreateItem = () => {
                       {conditions.map((condition, index) => (
                         <SelectItem
                           value={condition}
-                          className="flex items-center space-x-2"
+                          className="flex items-center space-x-2 h-14 "
                           key={index}
                         >
                           {condition}
@@ -230,9 +229,9 @@ export const CreateItem = () => {
               )}
             />
 
-            <Card
+            <div
               onClick={() => setShowMore((prevState) => !prevState)}
-              className="py-2 px-2 cursor-pointer hover:bg-grey-800"
+              className="py-2 px-2 cursor-pointer hover:bg-red"
             >
               <CardTitle className="my-2">More Details</CardTitle>
               <div className="flex justify-between">
@@ -241,47 +240,50 @@ export const CreateItem = () => {
                 </CardDescription>
                 <ChevronDownIcon className="h-6 w-6" />
               </div>
-            </Card>
-            {showMore && (
-              <>
-                <FormField
-                  control={form.control}
-                  name="description"
-                  disabled={isPending}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Description</FormLabel>
-                      <FormControl>
-                        <Textarea
-                          {...field}
-                          placeholder="Description"
-                          className="space-y-4 w-[400px]"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="location"
-                  disabled={isPending}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Input
-                          {...field}
-                          placeholder="location"
-                          type="text"
-                          className="space-y-4 w-[400px]"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </>
-            )}
+            </div>
+            <div>
+              {showMore && (
+                <>
+                  <FormField
+                    control={form.control}
+                    name="description"
+                    disabled={isPending}
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Description</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            {...field}
+                            placeholder="Description"
+                            className="space-y-4 w-[400px]"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="location"
+                    disabled={isPending}
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            placeholder="location"
+                            type="text"
+                            className="space-y-4 w-[400px]"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </>
+              )}
+            </div>
+
             {/* {!!image && (
             <div className="h-96 md:h-[450] overflow-hidden rounded-md">
               <img src={image} alt="Post preview" width={400} height={400} />
