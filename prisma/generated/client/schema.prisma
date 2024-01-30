@@ -49,8 +49,8 @@ model Product {
   description String?
   price   Decimal?  
   image   String? 
-  images  Images[] 
   imagesId   String?
+  images  Images[] 
 
   location String?
   authorId   String?
@@ -67,13 +67,15 @@ model Product {
   @@index([imagesId], name: "idx_imagesId")
 
 }
-model Images{
-  id    String    @id @default(cuid())
-  title String
-
+model Images {
+  id      String @id @default(cuid())
+   title     String
+  url     String
   product Product[]
-
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
+
 model Category{
   id    String    @id @default(cuid())
   title String

@@ -1,7 +1,7 @@
 "use server";
 
 import * as z from "zod";
-import { ProductShema } from "@/schemas";
+import { ProductSchema } from "@/schemas";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -9,31 +9,44 @@ import { db } from "@/lib/db";
 import { AuthError } from "next-auth";
 import { auth } from "@/auth";
 
-export const createProduct = async (values: z.infer<typeof ProductShema>) => {
+export const createProduct = async (values: z.infer<typeof ProductSchema>) => {
   const session = await auth();
   const userId: string | undefined = session?.user?.id;
 
-  const validatedFields = ProductShema.safeParse(values);
-
+  const validatedFields = ProductSchema.safeParse(values);
+  console.log("values in backend", values);
   if (validatedFields.success !== true || !validatedFields.data) {
     return { error: "Invalid fields!" };
   }
 
-  const { title, price, condition, description, image, category, location } =
-    validatedFields.data;
-  console.log({
+  const {
     title,
     price,
     condition,
     description,
     image,
+    images,
+    category,
+    location,
+  } = validatedFields.data;
+  console.log({
+    title,
+    price,
+    condition,
+    description,
+    images,
     category,
     location,
   });
   try {
     await db.product.create({
       data: {
-        image,
+        images: {
+          create: values.images.map((url: string) => ({
+            title: "Image Title",
+            url,
+          })),
+        },
         title,
         price,
         description,

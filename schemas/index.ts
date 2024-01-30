@@ -51,17 +51,16 @@ export const PostSchema2 = z.object({
     })
     .optional(),
   image: z.string().url(),
-  images: z.array(z.string().url()), 
+  images: z.array(z.string().url()),
 });
 
-export const ProductShema = PostSchema2.merge(
-  z.object({
-    // Add additional properties specific to ProductShema
-    price: z
-      .number()
-      .min(0, { message: "Price must be a non-negative number." }),
-    condition: z.string().optional(),
-    category: z.string().optional(),
-    location: z.string().optional(),
-  })
-);
+export const ProductSchema = z.object({
+  title: z.string().min(1).max(255), // Adjust max length as needed
+  description: z.string().min(10).max(1000).optional(),
+  condition: z.string().optional(),
+  category: z.string().optional(),
+  location: z.string().optional(),
+  price: z.number().min(0),
+  images: z.array(z.string().url()).max(4),
+  image: z.string().url().optional(),
+});

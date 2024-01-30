@@ -5555,16 +5555,25 @@ export namespace Prisma {
   export type ImagesMinAggregateOutputType = {
     id: string | null
     title: string | null
+    url: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ImagesMaxAggregateOutputType = {
     id: string | null
     title: string | null
+    url: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ImagesCountAggregateOutputType = {
     id: number
     title: number
+    url: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -5572,16 +5581,25 @@ export namespace Prisma {
   export type ImagesMinAggregateInputType = {
     id?: true
     title?: true
+    url?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type ImagesMaxAggregateInputType = {
     id?: true
     title?: true
+    url?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type ImagesCountAggregateInputType = {
     id?: true
     title?: true
+    url?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -5660,6 +5678,9 @@ export namespace Prisma {
   export type ImagesGroupByOutputType = {
     id: string
     title: string
+    url: string
+    createdAt: Date
+    updatedAt: Date
     _count: ImagesCountAggregateOutputType | null
     _min: ImagesMinAggregateOutputType | null
     _max: ImagesMaxAggregateOutputType | null
@@ -5682,6 +5703,9 @@ export namespace Prisma {
   export type ImagesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     title?: boolean
+    url?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     product?: boolean | Images$productArgs<ExtArgs>
     _count?: boolean | ImagesCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["images"]>
@@ -5689,6 +5713,9 @@ export namespace Prisma {
   export type ImagesSelectScalar = {
     id?: boolean
     title?: boolean
+    url?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
   export type ImagesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5705,6 +5732,9 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       title: string
+      url: string
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["images"]>
     composites: {}
   }
@@ -6102,6 +6132,9 @@ export namespace Prisma {
   interface ImagesFieldRefs {
     readonly id: FieldRef<"Images", 'String'>
     readonly title: FieldRef<"Images", 'String'>
+    readonly url: FieldRef<"Images", 'String'>
+    readonly createdAt: FieldRef<"Images", 'DateTime'>
+    readonly updatedAt: FieldRef<"Images", 'DateTime'>
   }
     
 
@@ -9363,7 +9396,10 @@ export namespace Prisma {
 
   export const ImagesScalarFieldEnum: {
     id: 'id',
-    title: 'title'
+    title: 'title',
+    url: 'url',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type ImagesScalarFieldEnum = (typeof ImagesScalarFieldEnum)[keyof typeof ImagesScalarFieldEnum]
@@ -9742,12 +9778,18 @@ export namespace Prisma {
     NOT?: ImagesWhereInput | ImagesWhereInput[]
     id?: StringFilter<"Images"> | string
     title?: StringFilter<"Images"> | string
+    url?: StringFilter<"Images"> | string
+    createdAt?: DateTimeFilter<"Images"> | Date | string
+    updatedAt?: DateTimeFilter<"Images"> | Date | string
     product?: ProductListRelationFilter
   }
 
   export type ImagesOrderByWithRelationInput = {
     id?: SortOrder
     title?: SortOrder
+    url?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     product?: ProductOrderByRelationAggregateInput
   }
 
@@ -9757,12 +9799,18 @@ export namespace Prisma {
     OR?: ImagesWhereInput[]
     NOT?: ImagesWhereInput | ImagesWhereInput[]
     title?: StringFilter<"Images"> | string
+    url?: StringFilter<"Images"> | string
+    createdAt?: DateTimeFilter<"Images"> | Date | string
+    updatedAt?: DateTimeFilter<"Images"> | Date | string
     product?: ProductListRelationFilter
   }, "id">
 
   export type ImagesOrderByWithAggregationInput = {
     id?: SortOrder
     title?: SortOrder
+    url?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: ImagesCountOrderByAggregateInput
     _max?: ImagesMaxOrderByAggregateInput
     _min?: ImagesMinOrderByAggregateInput
@@ -9774,6 +9822,9 @@ export namespace Prisma {
     NOT?: ImagesScalarWhereWithAggregatesInput | ImagesScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Images"> | string
     title?: StringWithAggregatesFilter<"Images"> | string
+    url?: StringWithAggregatesFilter<"Images"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Images"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Images"> | Date | string
   }
 
   export type CategoryWhereInput = {
@@ -10244,40 +10295,61 @@ export namespace Prisma {
   export type ImagesCreateInput = {
     id?: string
     title: string
+    url: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     product?: ProductCreateNestedManyWithoutImagesInput
   }
 
   export type ImagesUncheckedCreateInput = {
     id?: string
     title: string
+    url: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     product?: ProductUncheckedCreateNestedManyWithoutImagesInput
   }
 
   export type ImagesUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: ProductUpdateManyWithoutImagesNestedInput
   }
 
   export type ImagesUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: ProductUncheckedUpdateManyWithoutImagesNestedInput
   }
 
   export type ImagesCreateManyInput = {
     id?: string
     title: string
+    url: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ImagesUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ImagesUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CategoryCreateInput = {
@@ -10767,16 +10839,25 @@ export namespace Prisma {
   export type ImagesCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
+    url?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ImagesMaxOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
+    url?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ImagesMinOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
+    url?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type CategoryCountOrderByAggregateInput = {
@@ -11720,11 +11801,17 @@ export namespace Prisma {
   export type ImagesCreateWithoutProductInput = {
     id?: string
     title: string
+    url: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ImagesUncheckedCreateWithoutProductInput = {
     id?: string
     title: string
+    url: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ImagesCreateOrConnectWithoutProductInput = {
@@ -11811,6 +11898,9 @@ export namespace Prisma {
     NOT?: ImagesScalarWhereInput | ImagesScalarWhereInput[]
     id?: StringFilter<"Images"> | string
     title?: StringFilter<"Images"> | string
+    url?: StringFilter<"Images"> | string
+    createdAt?: DateTimeFilter<"Images"> | Date | string
+    updatedAt?: DateTimeFilter<"Images"> | Date | string
   }
 
   export type UserUpsertWithoutProductInput = {
@@ -12264,16 +12354,25 @@ export namespace Prisma {
   export type ImagesUpdateWithoutProductInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ImagesUncheckedUpdateWithoutProductInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ImagesUncheckedUpdateManyWithoutProductInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProductUpdateWithoutImagesInput = {

@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { useState, useTransition } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { ProductSchema } from "@/schemas";
+import { ProductShema } from "@/schemas";
 import { Button } from "../../button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
@@ -51,8 +51,8 @@ export const CreateItem = () => {
   const [showMore, setShowMore] = useState<boolean>(false);
   const [isPending, startTransition] = useTransition();
 
-  const form = useForm<z.infer<typeof ProductSchema>>({
-    resolver: zodResolver(ProductSchema),
+  const form = useForm<z.infer<typeof ProductShema>>({
+    resolver: zodResolver(ProductShema),
     defaultValues: {
       title: "",
       description: "",
@@ -66,11 +66,11 @@ export const CreateItem = () => {
   });
   const images = form.watch("image");
   // console.log("image", images);
-  const onSubmit = (values: z.infer<typeof ProductSchema>) => {
+  const onSubmit = (values: z.infer<typeof ProductShema>) => {
     setError("");
     setSuccess("");
 
-    console.log("Form values:", values);
+    // console.log("Form values:", values);
     startTransition(() => {
       createProduct(values).then((data) => {
         setError(data?.error);
@@ -152,6 +152,7 @@ export const CreateItem = () => {
                       {...field}
                       placeholder="Price"
                       type="number"
+                      defaultValue=""
                       className="space-y-8 h-14 py-4 border border-gray-300 transition-all duration-300 hover:border-black focus:border-blue-500 focus:border-2 focus:border-solid "
                       onChange={(event) =>
                         field.onChange(parseFloat(event.target.value))
@@ -295,9 +296,9 @@ export const CreateItem = () => {
           </form>
         </Form>
       </div>
-      {/* <div className="flex flex-1 justify-center w-full bg-gray-200 border-9 border-red-900">
+      <div className="flex flex-1 justify-center w-full bg-gray-200 border-9 border-red-900">
         <ItemPreview values={form.getValues()} />
-      </div> */}
+      </div>
     </div>
   );
 };

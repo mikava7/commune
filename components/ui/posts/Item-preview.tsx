@@ -26,7 +26,7 @@ export default function ItemPreview({ values }: { values: Product }) {
           <div className="flex h-full w-full ">
             <div className="w-4/6 flex h-full overflow-hidden">
               {values?.images && values?.images?.length > 0 ? (
-                <Card className="flex h-full bg-gray-100">
+                <div className="flex h-full bg-gray-100">
                   <Carousel>
                     <CarouselContent>
                       {values.images &&
@@ -45,9 +45,9 @@ export default function ItemPreview({ values }: { values: Product }) {
                     <CarouselPrevious />
                     <CarouselNext />
                   </Carousel>
-                </Card>
+                </div>
               ) : (
-                <div className="flex flex-col w-full h-full bg-gray-100 items-center justify-center rounded-l-lg">
+                <div className="flex flex-col w-full h-9/10 bg-gray-100 items-center justify-center rounded-l-lg">
                   <h2 className="text-[1.35rem] text-gray-600 font-bold mb-1">
                     Your Listing Preview
                   </h2>
