@@ -11,8 +11,8 @@ import { auth } from "@/auth";
 
 export const createProduct = async (values: z.infer<typeof ProductSchema>) => {
   const session = await auth();
-  const userId: string | undefined = session?.user?.id;
-
+  const authorId: string | undefined = session?.user?.id;
+  console.log("userId in createProduct", authorId);
   const validatedFields = ProductSchema.safeParse(values);
   console.log("values in backend", values);
   if (validatedFields.success !== true || !validatedFields.data) {
@@ -51,13 +51,20 @@ export const createProduct = async (values: z.infer<typeof ProductSchema>) => {
         price,
         description,
         location,
+        category: {
+          create: { title: category || "Electronics" },
+        },
+        condition: {
+          create: { title: condition || "new" },
+        },
         author: {
           connect: {
-            id: userId,
+            id: authorId,
           },
         },
       },
     });
+
     console.log("Product listed successfully");
     return { success: "Product listed successfully" };
   } catch (error) {
@@ -66,7 +73,7 @@ export const createProduct = async (values: z.infer<typeof ProductSchema>) => {
   } finally {
     await db.$disconnect();
     // Commenting out revalidatePath and redirect for now
-    revalidatePath("/posts");
-    redirect("/posts");
+    revalidatePath("/products");
+    redirect("/products");
   }
 };

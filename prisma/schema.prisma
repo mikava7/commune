@@ -12,12 +12,12 @@ generator client {
 
 }
 model User {
-  id            String    @id @default(cuid())
+  id String    @id @default(cuid())
   email String? @unique
   name String?
   password String?
   posts   Post[]
-  product Product[]
+  products Product[]
   accounts Account[]
   address String?
   imageLink String?
@@ -48,13 +48,10 @@ model Product {
   title        String
   description String?
   price   Decimal?  
-  image   String? 
-  imagesId   String?
-  images  Images[] 
-
-  location String?
-  authorId   String?
-  author     User?       @relation(fields: [authorId], references: [id])
+  images  Image[] 
+  location   String?
+  author     User      @relation(fields: [authorId], references: [id])
+  authorId   String
   categoryId   String?
   category     Category?       @relation(fields: [categoryId], references: [id])
   conditionId   String?
@@ -64,16 +61,17 @@ model Product {
   @@index([authorId], name: "idx_authorId")
   @@index([categoryId], name: "idx_categoryId")
   @@index([conditionId], name: "idx_conditionId")
-  @@index([imagesId], name: "idx_imagesId")
 
 }
-model Images {
+model Image {
   id      String @id @default(cuid())
-   title     String
+  title     String
   url     String
-  product Product[]
+  product Product @relation(fields: [productId], references: [id])
+  productId String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  @@index([productId])
 }
 
 model Category{

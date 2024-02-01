@@ -1,6 +1,7 @@
 "use client";
+import ImageContainer from "./Image-container";
 const ProductCard = ({ product }: any) => {
-  console.log(product, product);
+  console.log("product", product);
   return (
     <div className="max-w-md mx-auto bg-white rounded-xl overflow-hidden shadow-lg p-6 mb-6">
       {/* Title */}
@@ -10,13 +11,9 @@ const ProductCard = ({ product }: any) => {
       <p className="text-gray-600 mb-4">{product.description}</p>
 
       {/* Image */}
-      <img
-        src={
-          "https://utfs.io/f/160574dc-d8a2-4724-8492-45fac34f70dc-u0bsfq.jpg"
-        }
-        alt={product.title}
-        className="w-full h-48 object-cover mb-4"
-      />
+
+        <ImageContainer images={product.images} />
+     
 
       {/* Price */}
       <p className="text-green-600 font-bold text-lg mb-2">${product.price}</p>
