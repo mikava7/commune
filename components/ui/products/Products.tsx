@@ -3,7 +3,7 @@
 import ProductCard from "./Product-card";
 
 export default function Products({ products }: any) {
-  console.log("Products in Products", products);
+  // console.log("Products in Products", products);
   return (
     <div>
       {" "}

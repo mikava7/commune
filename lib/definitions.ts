@@ -60,14 +60,22 @@ export type Category = {
 };
 export interface Product {
   id?: string;
-  createdAt?: string;
-  updatedAt?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
   title: string;
   description?: string;
-  image: string;
+  images: Image[];
   price: number;
-  condition?: string;
-  category?: string;
+  conditionId?: string;
+  categoryId?: string;
   location?: string;
-  images?: [string];
+}
+
+export interface Image {
+  id?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  title?: string;
+  url: string;
+  productId?: string;
 }

@@ -1,7 +1,9 @@
 "use client";
+import { timeAgo } from "@/lib/utils";
+import { Product } from "@/lib/definitions";
 import ImageContainer from "./Image-container";
-const ProductCard = ({ product }: any) => {
-  console.log("product", product);
+const ProductCard = ({ product }: { product: Product }) => {
+  // console.log("product", product);
   return (
     <div className="max-w-md mx-auto bg-white rounded-xl overflow-hidden shadow-lg p-6 mb-6">
       {/* Title */}
@@ -12,8 +14,7 @@ const ProductCard = ({ product }: any) => {
 
       {/* Image */}
 
-        <ImageContainer images={product.images} />
-     
+      <ImageContainer images={product.images} />
 
       {/* Price */}
       <p className="text-green-600 font-bold text-lg mb-2">${product.price}</p>
@@ -26,28 +27,10 @@ const ProductCard = ({ product }: any) => {
         Condition: {product.conditionId || "N/A"}
       </p>
 
-      {/* Category */}
-      <p className="text-gray-500 mb-2">
-        Category: {product.categoryId || "N/A"}
-      </p>
-
-      {/* Author ID */}
-      <p className="text-gray-500 mb-2">
-        Author ID: {product.authorId || "N/A"}
-      </p>
-
       {/* Created At */}
       <p className="text-gray-500 mb-2">
-        Created At: {product.createdAt.toString() || "N/A"}
+        Created: {timeAgo(product.createdAt)}
       </p>
-
-      {/* Updated At */}
-      <p className="text-gray-500 mb-2">
-        Updated At: {product.updatedAt.toString() || "N/A"}
-      </p>
-
-      {/* ID */}
-      <p className="text-gray-500 mb-2">ID: {product.id || "N/A"}</p>
     </div>
   );
 };

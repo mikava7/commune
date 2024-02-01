@@ -1,43 +1,60 @@
+/* images.css */
 /* Add appropriate styling for each case */
 .image-container {
-        display: flex;
-      }
-      
-      .single-image {
-        width: 100%;
-      }
-      
-      .two-images {
-        width: 50%;
-      }
-      
-      .three-images {
-        width: 50%;
-      }
-      
-      .four-images {
-        width: 100%;
-      }
-      
-      /* Add more specific styling for each image placement */
-      .half {
-        width: 50%;
-      }
-      
-      left-half {
-        width: 50%;
-      }
-      
-      .right-half {
-        width: 50%;
-      }
-      
-      .grid-1,
-      .grid-2,
-      .grid-3,
-      .grid-4 {
-        width: 50%;
-      }
-      
-      /* Add more specific styling for each grid item if needed */
-      
+  border: 2px solid red;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.single-image {
+  width: 100%;
+  border: 1px solid black;
+}
+
+.two-images {
+  width: 100%;
+  height: inherit;
+  border: 1px solid black;
+}
+
+.three-images {
+  width: 100%;
+  height: auto; /* Change 'inherit' to 'auto' to allow the images to take their natural height */
+  border: 2px solid green;
+}
+
+.four-images {
+  display: flex;
+  width: 400px;
+  height: 420px;
+  border: 1px solid black;
+}
+
+/* Add more specific styling for each image placement */
+.half {
+  width: 50%;
+  height: inherit;
+  border: 1px solid white;
+}
+
+.left-half {
+  width: 50%;
+  height: inherit;
+  border: 1px solid red;
+}
+
+.right-half {
+  width: 50%;
+  height: inherit;
+  border: 1px solid white;
+}
+
+.top-half {
+  width: 50%;
+  border: 1px solid white;
+}
+
+.bottom-half {
+  width: 50%;
+  border: 1px solid white;
+}

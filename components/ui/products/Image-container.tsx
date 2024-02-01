@@ -1,9 +1,11 @@
-"use client"; // 'use client' is not necessary for importing styles
+// ImageContainer.tsx
+"use client";
 import React from "react";
 import "./images.css"; // Import your styles here
-
-const ImageContainer = ({ images }) => {
-  const imageCount = images.length;
+import { Image } from "@/lib/definitions";
+const ImageContainer = ({ images }: { images: Image[] }) => {
+  const imageCount: number = images.length;
+  console.log("images", images);
 
   const getImageContainerClass = () => {
     switch (imageCount) {
@@ -20,33 +22,41 @@ const ImageContainer = ({ images }) => {
     }
   };
 
-  const getImageClass = (index) => {
+  const getImageClass = (index: number) => {
     switch (imageCount) {
       case 1:
         return "full";
       case 2:
         return index === 0 ? "half" : "half";
       case 3:
-        return index === 0 ? "left-half" : "right-half";
+        // Render only 2 images for the case of 3 images
+        return index < 2 ? "top-half" : null;
       case 4:
-        return `grid-${index + 1}`;
+        return index < 2 ? "top-half" : "bottom-half";
       default:
         return "";
     }
   };
 
-  return (
-    <div className={`image-container ${getImageContainerClass()}`}>
-      {images.map((image, index) => (
-        <img
-          key={image.id}
-          src={image.url}
-          alt={image.title}
-          className={`image ${getImageClass(index)}`}
-          style={{ border: '1px solid blue', width: '100px', height: '100px' }} // Adjust styles as needed
+  const imageContainerClass = getImageContainerClass();
+  console.log("imageContainerClass", imageContainerClass);
 
-          />
-      ))}
+  return (
+    <div className={`image-container ${imageContainerClass}`}>
+      {images.map((image, index) => {
+        const imageClass = getImageClass(index);
+        if (imageClass) {
+          return (
+            <img
+              key={image.id}
+              src={image.url}
+              alt={image.title}
+              className={`image ${imageClass}`}
+            />
+          );
+        }
+        return null; // Skip rendering when imageClass is null
+      })}
     </div>
   );
 };
