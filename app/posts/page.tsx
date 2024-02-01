@@ -11,16 +11,6 @@ export default async function page() {
   const posts: Post[] = await getPosts();
   return (
     <div>
-      <form
-        action={async () => {
-          "use server";
-          await signOut();
-        }}
-      >
-        <Button>
-          <div>Sign Out</div>
-        </Button>
-      </form>
       <Link href={"/create"} className="flex items-center justify-center">
         <h1>Create New Post</h1>
       </Link>
