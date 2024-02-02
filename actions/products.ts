@@ -13,7 +13,7 @@ export async function getProducts() {
     if (!products) {
       throw new Error("No products found");
     }
-    console.log("products in getProducts", products);
+    // console.log("products in getProducts", products);
     return products;
   } catch (error: any) {
     throw new Error("Failed to fetch posts: " + error.message);

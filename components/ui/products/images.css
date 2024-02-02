@@ -1,9 +1,13 @@
 /* images.css */
 /* Add appropriate styling for each case */
 .image-container {
-  border: 2px solid red;
+  background-color: brown;
+  border: 1px solid white;
+
   display: flex;
   flex-wrap: wrap;
+  width: 300px;
+  height: 320px;
 }
 
 .single-image {
@@ -13,20 +17,19 @@
 
 .two-images {
   width: 100%;
-  height: inherit;
+  max-height: 100%;
   border: 1px solid black;
 }
 
 .three-images {
   width: 100%;
-  height: auto; /* Change 'inherit' to 'auto' to allow the images to take their natural height */
-  border: 2px solid green;
+  max-height: 100%;
 }
 
 .four-images {
   display: flex;
-  width: 400px;
-  height: 420px;
+  width: 300px;
+  height: 320px;
   border: 1px solid black;
 }
 
@@ -40,7 +43,7 @@
 .left-half {
   width: 50%;
   height: inherit;
-  border: 1px solid red;
+  border: 1px solid white;
 }
 
 .right-half {
