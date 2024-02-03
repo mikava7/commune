@@ -16,18 +16,16 @@ const ProductCard = ({ product }: { product: Product }) => {
           <p className="text-gray-500 mb-2">
             Location: <b>{product.location}</b>
           </p>
-          {/* Price */}
+
           <p className="text-green-600 font-bold text-lg mb-2">
             ${product.price}
           </p>
         </div>
 
-        {/* Condition */}
         <p className="text-gray-500 mb-2">
           Condition: {product.condition || "N/A"}
         </p>
 
-        {/* Created At */}
         <p className="text-gray-500 mb-2">
           added: {product.createdAt ? timeAgo(product.createdAt) : "N/A"}
         </p>
