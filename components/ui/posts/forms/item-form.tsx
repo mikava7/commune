@@ -99,7 +99,7 @@ export const CreateItem = () => {
                 render={({ field, fieldState }) => (
                   <FormItem className="bg-gray-200 ">
                     <CardDescription className="py-4 px-2 text-black">
-                      Photos · 0 / 10 - You can add up to 10 photos.
+                      Photos · 0 / 4 - You can add up to 10 photos.
                     </CardDescription>{" "}
                     <FormControl>
                       <UploadButton<OurFileRouter, "imageUploader">
@@ -107,7 +107,7 @@ export const CreateItem = () => {
                         onClientUploadComplete={(res) => {
                           console.log("res", res);
                           const newImages = res.map((item) => item.url);
-                          console.log("newImages", newImages);
+                          // console.log("newImages", newImages);
 
                           form.setValue("images", newImages);
                         }}
@@ -295,9 +295,9 @@ export const CreateItem = () => {
           </form>
         </Form>
       </div>
-      {/* <div className="flex flex-1 justify-center w-full bg-gray-200 border-9 border-red-900">
+      <div className="flex flex-1 justify-center w-full bg-gray-200 border-9 border-red-900">
         <ItemPreview values={form.getValues()} />
-      </div> */}
+      </div>
     </div>
   );
 };

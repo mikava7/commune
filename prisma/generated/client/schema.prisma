@@ -12,7 +12,7 @@ generator client {
 
 }
 model User {
-  id            String    @id @default(cuid())
+  id String    @id @default(cuid())
   email String? @unique
   name String?
   password String?
@@ -47,11 +47,11 @@ model Product {
   id           String    @id @default(cuid())
   title        String
   description String?
-  price   Decimal?  
+  price   Float?  
   images  Image[] 
   location   String?
-  author     User?       @relation(fields: [authorId], references: [id])
-  authorId   String?
+  author     User      @relation(fields: [authorId], references: [id])
+  authorId   String
   categoryId   String?
   category     Category?       @relation(fields: [categoryId], references: [id])
   conditionId   String?

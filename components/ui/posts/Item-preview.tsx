@@ -26,26 +26,24 @@ export default function ItemPreview({ values }: { values: Product }) {
           <div className="flex h-full w-full ">
             <div className="w-4/6 flex h-full overflow-hidden">
               {values?.images && values?.images?.length > 0 ? (
-                <div className="flex h-full bg-gray-100">
-                  <Carousel>
-                    <CarouselContent>
-                      {values.images &&
-                        values?.images?.map((i) => (
-                          <CarouselItem key={i}>
-                            <div className="h-full w-full overflow-hidden">
-                              <img
-                                src={i}
-                                alt="Post preview"
-                                className="object-cover w-full h-full"
-                              />
-                            </div>
-                          </CarouselItem>
-                        ))}
-                    </CarouselContent>
-                    <CarouselPrevious />
-                    <CarouselNext />
-                  </Carousel>
-                </div>
+                <Carousel>
+                  <CarouselContent>
+                    {values.images &&
+                      values?.images?.map((i): any => (
+                        <CarouselItem key={i} className="bg:red-9000">
+                          <Image
+                            src={i}
+                            alt="Post preview"
+                            width={400}
+                            height={400}
+                            objectFit="cover"
+                          />
+                        </CarouselItem>
+                      ))}
+                  </CarouselContent>
+                  <CarouselPrevious />
+                  <CarouselNext />
+                </Carousel>
               ) : (
                 <div className="flex flex-col w-full h-9/10 bg-gray-100 items-center justify-center rounded-l-lg">
                   <h2 className="text-[1.35rem] text-gray-600 font-bold mb-1">
@@ -62,13 +60,13 @@ export default function ItemPreview({ values }: { values: Product }) {
 
             <div className="flex flex-col text-gray-500">
               <div className="w-full ml-2 pl-2 pt-2">
-                <h1 className="text-xl text-black font-bold">
+                <div className="text-xl text-black font-bold">
                   {values.title ? (
                     values.title
                   ) : (
                     <h1 className="text-2xl text-gray-500">Title</h1>
                   )}
-                </h1>
+                </div>
                 <h1>{values.price ? values.price : "Price "}</h1>
 
                 <p className="text-xs">

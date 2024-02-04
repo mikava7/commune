@@ -47,7 +47,7 @@ model Product {
   id           String    @id @default(cuid())
   title        String
   description String?
-  price   Decimal?  
+  price   Float?  
   images  Image[] 
   location   String?
   author     User      @relation(fields: [authorId], references: [id])

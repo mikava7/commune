@@ -4,7 +4,7 @@ module.exports = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "assets.example.com",
+        hostname: "localhost:3000",
         port: "",
         pathname: "/account123/**",
       },

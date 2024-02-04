@@ -5,7 +5,7 @@ import "./images.css"; // Import your styles here
 import { Image } from "@/lib/definitions";
 const ImageContainer = ({ images }: { images: Image[] }) => {
   const imageCount: number = images.length;
-  console.log("images", images);
+  // console.log("images", images);
 
   const getImageContainerClass = () => {
     switch (imageCount) {
@@ -39,7 +39,7 @@ const ImageContainer = ({ images }: { images: Image[] }) => {
   };
 
   const imageContainerClass = getImageContainerClass();
-  console.log("imageContainerClass", imageContainerClass);
+  // console.log("imageContainerClass", imageContainerClass);
 
   return (
     <div className={`image-container ${imageContainerClass}`}>
