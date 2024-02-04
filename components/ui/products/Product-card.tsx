@@ -23,7 +23,7 @@ const ProductCard = ({ product }: { product: Product }) => {
         </div>
 
         <p className="text-gray-500 mb-2">
-          Condition: {product.condition || "N/A"}
+          Condition: {product?.condition || "N/A"}
         </p>
 
         <p className="text-gray-500 mb-2">

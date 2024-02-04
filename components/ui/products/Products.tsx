@@ -7,7 +7,7 @@ export default function Products({ products }: { products: Product }) {
   return (
     <div className="flex flex-wrap gap-3">
       {" "}
-      {products.map((product: { id: any }): any => (
+      {products.map((product: { id: String }): any => (
         <ProductCard key={product.id} product={product} />
         // <div className="w-400 h-400 border-4 ">sss</div>
       ))}

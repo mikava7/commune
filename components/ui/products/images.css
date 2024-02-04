@@ -3,7 +3,6 @@
 .image-container {
   background-color: brown;
   border: 1px solid white;
-
   display: flex;
   flex-wrap: wrap;
   width: 300px;
