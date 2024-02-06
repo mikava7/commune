@@ -4,7 +4,7 @@ import React from "react";
 import "./images.css"; // Import your styles here
 import { Image } from "@/lib/definitions";
 const ImageContainer = ({ images }: { images: Image[] }) => {
-  const imageCount: number = images.length;
+  const imageCount: number = images && images?.length;
   // console.log("images", images);
 
   const getImageContainerClass = () => {
@@ -43,20 +43,21 @@ const ImageContainer = ({ images }: { images: Image[] }) => {
 
   return (
     <div className={`image-container ${imageContainerClass}`}>
-      {images.map((image, index) => {
-        const imageClass = getImageClass(index);
-        if (imageClass) {
-          return (
-            <img
-              key={image.id}
-              src={image.url}
-              alt={image.title}
-              className={`image ${imageClass}`}
-            />
-          );
-        }
-        return null; // Skip rendering when imageClass is null
-      })}
+      {images &&
+        images?.map((image, index) => {
+          const imageClass = getImageClass(index);
+          if (imageClass) {
+            return (
+              <img
+                key={image.id}
+                src={image.url}
+                alt={image.title}
+                className={`image ${imageClass}`}
+              />
+            );
+          }
+          return null; // Skip rendering when imageClass is null
+        })}
     </div>
   );
 };

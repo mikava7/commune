@@ -22,3 +22,25 @@ export async function getProducts() {
     await db.$disconnect();
   }
 }
+
+export async function getProductById(id: string) {
+  try {
+    const product = await db.product.findUnique({
+      where: {
+        id: id,
+      },
+      include: {
+        images: true,
+      },
+    });
+    if (!product) {
+      throw new Error("No product");
+    }
+    return product;
+  } catch (error: any) {
+    throw new Error("Failed to fetch posts: " + error.message);
+  } finally {
+    // Disconnect the Prisma client to release the database connection
+    await db.$disconnect();
+  }
+}

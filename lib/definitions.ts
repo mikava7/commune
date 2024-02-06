@@ -63,7 +63,7 @@ export interface Product {
   createdAt?: Date;
   updatedAt?: Date;
   title: string;
-  description?: string;
+  description?: string | null;
   images: Image[];
   price: number;
   conditionId?: string;
