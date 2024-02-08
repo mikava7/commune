@@ -39,10 +39,12 @@ const ProductPage = ({ product }: { product: Product }) => {
             <CarouselContent className="relative h-[600px]" onChange={()=>console.log('clicked')}>
               {product.images.map((image, index) => (
                 <CarouselItem key={image.id} onChange={()=>setActiveIndex(index)}>
-                  <img
+                  <Image
                     src={image.url}
                     onClick={()=>console.log("sssssssss")}
                     alt={`${product.title}'s image`}
+                    width={576}
+                    height={500}
                     style={{
                       maxWidth: "100%",
                       maxHeight: "80%",
@@ -59,7 +61,7 @@ const ProductPage = ({ product }: { product: Product }) => {
 
                    <div className="absolute bottom-0 outline-dashed left-0 w-full flex justify-center gap-1">
               {product.images.map((img, idx) => (
-                <img
+                <Image
                   src={img.url}
                   alt={`${product.title}'s image`}
                   width={50}

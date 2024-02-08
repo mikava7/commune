@@ -4,9 +4,13 @@ module.exports = {
     remotePatterns: [
       {
         protocol: "https",
+        hostname: "utfs.io",
+      },
+      {
+        protocol: "https",
         hostname: "uploadthing.com",
         port: "",
-        pathname: "/*",
+        pathname: "/dashboard/*",
       },
     ],
   },

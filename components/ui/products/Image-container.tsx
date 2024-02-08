@@ -2,8 +2,9 @@
 "use client";
 import React from "react";
 import "./images.css"; // Import your styles here
-import { Image } from "@/lib/definitions";
-const ImageContainer = ({ images }: { images: Image[] }) => {
+import { Image as ImageType } from "@/lib/definitions";
+import Image from "next/image";
+const ImageContainer = ({ images }: { images: ImageType[] }) => {
   const imageCount: number = images && images?.length;
   // console.log("images", images);
 
@@ -48,10 +49,12 @@ const ImageContainer = ({ images }: { images: Image[] }) => {
           const imageClass = getImageClass(index);
           if (imageClass) {
             return (
-              <img
+              <Image
                 key={image.id}
                 src={image.url}
                 alt={image.title}
+                width={400}
+                height={400}
                 className={`image ${imageClass}`}
               />
             );
