@@ -4,9 +4,9 @@ module.exports = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "localhost:3000",
+        hostname: "uploadthing.com",
         port: "",
-        pathname: "/account123/**",
+        pathname: "/*",
       },
     ],
   },

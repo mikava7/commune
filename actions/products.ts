@@ -24,6 +24,7 @@ export async function getProducts() {
 }
 
 export async function getProductById(id: string) {
+  await new Promise((resolve) => setTimeout(resolve, 1000));
   try {
     const product = await db.product.findUnique({
       where: {

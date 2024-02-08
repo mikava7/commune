@@ -2,22 +2,28 @@ import React from "react";
 import { getProductById } from "@/actions/products";
 import { headers } from "next/headers";
 import ProductPage from "@/components/ui/products/product";
-const productPage = async () => {
-  const headersList = headers();
-  const domain = headersList.get("host") || "";
-  const fullUrl = headersList.get("referer") || "";
-  const id:String = fullUrl.split("/").pop();
+import { Product } from "@/lib/definitions";
+interface Props {
+  productId: string;
+}
 
-  // console.log("fullUrl", id);
-  const product = await getProductById(id);
-  // console.log("product", product);
-  // console.log("headersList", headersList);
+const productPage = async ({ params }: { params: Props }) => {
+  const id: string = params.productId;
 
-  return (
-    <div>
-      <ProductPage product={product} />
+  // const headersList = headers();
+  // const domain = headersList.get("host") || "";
+  // const fullUrl = headersList.get("referer") || "";
+  // const id: string = (fullUrl.split("/").pop() as string) || "";
+
+  const product: Product = await getProductById(id);
+
+  return(
+
+    
+    <div className="bg-red-300 h-screen">
+      <ProductPage product={product} />;
     </div>
-  );
+    ) 
 };
 
 export default productPage;

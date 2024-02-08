@@ -3,7 +3,6 @@ import { timeAgo } from "@/lib/utils";
 import { Product } from "@/lib/definitions";
 import ImageContainer from "./Image-container";
 const ProductCard = ({ product }: { product: Product }) => {
-  console.log("product in client", product);
   return (
     <div className="w-[300px] mx-auto bg-gray-200 rounded-xl overflow-hidden shadow-lg py-2 mb-6">
       {/* Image */}

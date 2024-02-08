@@ -59,16 +59,17 @@ export type Category = {
   post: Post[];
 };
 export interface Product {
+  [x: string]: any;
   id?: string;
   createdAt?: Date;
   updatedAt?: Date;
   title: string;
   description?: string | null;
   images: Image[];
-  price: number;
-  conditionId?: string;
-  categoryId?: string;
-  location?: string;
+  price?: number | null;
+  conditionId?: string | null;
+  categoryId?: string | null;
+  location?: string | null;
 }
 
 export interface Image {
