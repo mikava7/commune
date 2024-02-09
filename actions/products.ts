@@ -2,10 +2,10 @@ import { db } from "@/lib/db";
 
 export async function getProducts() {
   try {
-    const products = await db.product.findMany({
-      orderBy: {
-        createdAt: "desc",
-      },
+    const products = await db?.product?.findMany({
+      // orderBy: {
+      //   createdAt: "desc",
+      // },
       include: {
         images: true,
       },

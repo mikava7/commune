@@ -43,6 +43,8 @@ const ProductPage = ({ product }: { product: Product }) => {
                     src={image.url}
                     onClick={()=>console.log("sssssssss")}
                     alt={`${product.title}'s image`}
+                    // fill
+                    // sizes="(max-width:768px) 100vw, (max-width:1200px)"
                     width={576}
                     height={500}
                     style={{

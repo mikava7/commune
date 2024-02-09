@@ -9,7 +9,7 @@ interface Props {
 
 const productPage = async ({ params }: { params: Props }) => {
   const id: string = params.productId;
-
+// console.log(params)
   // const headersList = headers();
   // const domain = headersList.get("host") || "";
   // const fullUrl = headersList.get("referer") || "";
