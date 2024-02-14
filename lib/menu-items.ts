@@ -4,6 +4,8 @@ import {
   CogIcon,
   CalendarIcon,
 } from "@heroicons/react/24/solid";
+import { LinkIcon, TruckIcon,  LightBulbIcon, AcademicCapIcon } 
+from '@heroicons/react/24/solid';
 
 export const navbarLinks = [
   { icon: HomeIcon as any, href: "/posts", label: "Feed" },
@@ -19,4 +21,15 @@ export const formTags = [
   { href: "/service-form", label: "service" },
   { href: "/announcement-form", label: "announcement" },
   { href: "/event-form", label: "event" },
+];
+
+
+export const sidebarLinks = [
+    { href: '/products', label: 'Products', icon: LinkIcon },
+    { href: '/vehicles', label: 'Vehicles', icon: TruckIcon },
+    { href: '/services', label: 'Services', icon: CogIcon },
+    { href: '/homes', label: 'Homes', icon: HomeIcon },
+    { href: '/events', label: 'Events', icon: CalendarIcon },
+    { href: '/workshops', label: 'Workshops', icon: LightBulbIcon },
+    { href: '/classes', label: 'Classes', icon: AcademicCapIcon }
 ];

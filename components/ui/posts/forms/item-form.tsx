@@ -242,7 +242,7 @@ export const CreateItem = () => {
             </div>
             <div>
               {showMore && (
-                <>
+                <div className='w-full '>
                   <FormField
                     control={form.control}
                     name="description"
@@ -250,11 +250,11 @@ export const CreateItem = () => {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Description</FormLabel>
-                        <FormControl>
+                        <FormControl className="h-14 w-full text-[20px] text-gray-600 w-full border border-gray-300 transition-all duration-300 hover:border-black focus:border-blue-500 focus:border-2 focus:border-solid">
                           <Textarea
                             {...field}
                             placeholder="Description"
-                            className="space-y-4 w-[400px]"
+                            className="space-y-4 "
                           />
                         </FormControl>
                         <FormMessage />
@@ -267,28 +267,24 @@ export const CreateItem = () => {
                     disabled={isPending}
                     render={({ field }) => (
                       <FormItem>
-                        <FormControl>
+                        <FormControl className="h-14 w-full text-[20px] my-4 text-gray-600 border border-gray-300 transition-all duration-300 hover:border-black focus:border-blue-500 focus:border-2 focus:border-solid">
                           <Input
                             {...field}
                             placeholder="location"
                             type="text"
-                            className="space-y-4 w-[400px]"
+                            className="space-y-4 "
                           />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
-                </>
+                </div>
               )}
             </div>
 
-            {/* {!!image && (
-            <div className="h-96 md:h-[450] overflow-hidden rounded-md">
-              <img src={image} alt="Post preview" width={400} height={400} />
-            </div>
-          )} */}
-            <Button type="submit" onClick={() => console.log("Clicked")}>
+           
+            <Button type="submit" className='m-auto'>
               Post
             </Button>
             {}
