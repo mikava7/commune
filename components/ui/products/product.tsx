@@ -15,36 +15,34 @@ const ProductPage = ({ product }: { product: Product }) => {
   // console.log("product", product);
   const [activeIndex, setActiveIndex] = useState(0);
   console.log("activeIndex",activeIndex)
-  const handleSlideChange: FormEventHandler<HTMLDivElement> = (event) => {
+  const handleSlideChange: FormEventHandler<HTMLDivElement> = (event:any) => {
     // Extract the newIndex from the event
-    const newIndex = parseInt(event.target.id);
-    setActiveIndex(newIndex);
+    console.log("event", event)
+
+    setActiveIndex(event);
   };
   return (
     <div className="flex w-full h-full bg-red-900 border-7 border-blue-700 rounded-xl overflow-hidden shadow-lg py-2 mb-6">
       {/* Product Image */}
       <div className="relative w-full bg-gray-200 px-20 border-7 border-yellow-700">
         {/* Background Blur */}
-        {/* <div
+        <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage: `url(${product.images[0].url})`,
             filter: "blur(20px)", // Adjust blur intensity as needed
           }}
-        ></div> */}
+        ></div>
 
         {/* Container with space on sides */}
         <div className="h-5/6 outline-dashed flex justify-center m-6 gap-3">
           <Carousel className="h-100vw ">
-            <CarouselContent className="relative h-[600px]" onChange={()=>console.log('clicked')}>
+            <CarouselContent className="relative h-[600px]" onClick={()=>console.log('clicked')}>
               {product.images.map((image, index) => (
-                <CarouselItem key={image.id} onChange={()=>setActiveIndex(index)}>
+                <CarouselItem key={image.id} onChange={handleSlideChange}>
                   <Image
                     src={image.url}
-                    onClick={()=>console.log("sssssssss")}
                     alt={`${product.title}'s image`}
-                    // fill
-                    // sizes="(max-width:768px) 100vw, (max-width:1200px)"
                     width={576}
                     height={500}
                     style={{
@@ -62,20 +60,22 @@ const ProductPage = ({ product }: { product: Product }) => {
             </CarouselContent>
 
                    <div className="absolute bottom-0 outline-dashed left-0 w-full flex justify-center gap-1">
-              {product.images.map((img, idx) => (
+              {product.images.map((img, index) => (
                 <Image
                   src={img.url}
                   alt={`${product.title}'s image`}
                   width={50}
                   height={50}
-                  id={idx.toString()}
-                  onClick={handleSlideChange}
-                  // className={index === activeIndex ? "border-2 border-red-500" : ""}
+                  id={index.toString()}
+                  onClick={() => handleSlideChange(index)}
+                  className={index === activeIndex ? "border-2 border-black" : ""}
                 />
               ))}
             </div>              
-            <CarouselPrevious />
-            <CarouselNext />
+            <CarouselPrevious className="bg-blue-700 hover:bg-blue-800" 
+                   
+                    />
+            <CarouselNext className="bg-blue-700 hover:bg-blue-800"/>
           </Carousel>
         </div>
       </div>

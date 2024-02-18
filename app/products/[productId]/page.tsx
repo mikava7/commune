@@ -20,7 +20,7 @@ const productPage = async ({ params }: { params: Props }) => {
   return(
 
     
-    <div className="bg-red-300 h-screen">
+    <div className="h-screen">
       <ProductPage product={product} />;
     </div>
     ) 
